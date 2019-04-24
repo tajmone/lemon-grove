@@ -1,0 +1,71 @@
+################################################################################
+# Lemon Grove
+# https://github.com/tajmone/lemon-grove
+################################################################################
+
+* text=auto
+
+## ============
+## Source Files
+## ============
+*.c   text
+*.h   text
+
+## =============
+## Shell scripts
+## =============
+*.bat      text eol=crlf
+*.com      text eol=crlf
+*.sh       text eol=lf
+*.ps1      text eol=crlf
+
+## ===================
+## Documentation files
+## ===================
+*.adoc         text
+*.asciidoc     text
+*.md           text
+*.txt          text
+*COPYRIGHT*    text
+*README*       text
+AUTHORS        text
+CHANGELOG      text
+CHANGES        text
+CONTRIBUTING   text
+COPYING        text
+copyright      text
+INSTALL        text
+license        text
+LICENSE        text
+NEWS           text
+readme         text
+
+## ===================
+## Configuration files
+## ===================
+*.cnf          text
+*.conf         text
+*.config       text
+*.ini          text
+*.prefs        text
+.editorconfig  text
+## -------------
+## Git settings:
+## -------------
+.gitattributes text
+.gitconfig     text
+.gitignore     text
+.gitmodules    text
+
+## ======================
+## IMAGE & GRAPHICS FILES
+## ======================
+*.bmp        binary
+*.gif        binary
+*.ico        binary
+*.jpeg       binary
+*.jpg        binary
+*.png        binary
+*.svg        binary
+
+# EOF #
