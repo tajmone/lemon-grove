@@ -108,7 +108,7 @@ By [@dccmx], MIT License.
 > Crappy syntax highlighting in Vim for Lemon Parser Generator grammars.
 
 <!-----------------------------------------------------------------------------
-                               REFERENCE LINKS                                
+                               REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
 [open an issue]: https://github.com/tajmone/lemon-grove/issues/new "Click to open a new issue..."
