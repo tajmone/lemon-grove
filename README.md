@@ -15,6 +15,7 @@ Project maintained by [Tristano Ajmone] since 2019/04/23.
 - [About Lemon](#about-lemon)
 - [Project Contents](#project-contents)
 - [Useful Links](#useful-links)
+    - [Official Lemon](#official-lemon)
     - [Editors Support for Lemon](#editors-support-for-lemon)
         - [Atom](#atom)
         - [Emacs](#emacs)
@@ -54,8 +55,16 @@ Currently, this repository contains only the official Lemon sources.
 
 # Useful Links
 
+## Official Lemon
+
 External links to useful third party Lemon-assets.
 
+- [Lemon homepage]
+- [Lemon documentation]
+- Upstream Lemon sources on [SQLite] repository ([Fossil]):
+    + [`lemon.c`](https://www.sqlite.org/src/file/tool/lemon.c)
+    + [`lempar.c`](https://www.sqlite.org/src/file/tool/lempar.c)
+    + [`lemon.html`](https://sqlite.org/src/doc/trunk/doc/lemon.html)
 
 ## Editors Support for Lemon
 
@@ -83,7 +92,7 @@ By [Masafumi Oyamada], GNU GPL v3.
 
 - https://github.com/ksherlock/sublime-lemon
 
-By [@ksherlock], no license provided.
+By [@ksherlock], CC0 1.0 Universal.
 
 > Sublime Text 3 syntax file for the Lemon parser generator.
 
@@ -92,7 +101,7 @@ By [@ksherlock], no license provided.
 - https://github.com/dccmx/vim-lemon-syntax
 - https://github.com/vim-scripts/lemon.vim
 
-By [dccmx], MIT License.
+By [@dccmx], MIT License.
 
 > Crappy syntax highlighting in Vim for Lemon Parser Generator grammars.
 
@@ -102,14 +111,20 @@ By [dccmx], MIT License.
 
 [open an issue]: https://github.com/tajmone/lemon-grove/issues/new "Click to open a new issue..."
 
+<!-- Lemon -->
+
+[Lemon homepage]: http://www.hwaci.com/sw/lemon/ "Visit the official Lemon homepage"
+[Lemon documentation]: https://sqlite.org/src/doc/trunk/doc/lemon.html "Read the official Lemon documentation"
+
 <!-- 3rd party tools -->
 
+[Fossil]: https://www.fossil-scm.org/ "Visit Fossil website"
 [SQLite]: https://www.sqlite.org/index.html "Visit SQLite website"
 
 <!-- people -->
 
+[@dccmx]: https://github.com/dccmx "View @dccmx's GitHub profile"
 [@ksherlock]: https://github.com/ksherlock "View @ksherlock's GitHub profile"
-[dccmx]: https://github.com/dccmx "View dccmx's GitHub profile"
 [Masafumi Oyamada]: http://mooz.github.io/ "Visit Masafumi Oyamada's website"
 [Tristano Ajmone]: https://github.com/tajmone "View Tristano Ajmone's GitHub profile"
 [Yursen Kim]: https://github.com/kyursen "View Yursen Kim's GitHub profile"
