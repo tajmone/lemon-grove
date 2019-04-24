@@ -38,16 +38,22 @@ endif::[]
 // Custom Attributes for Substitutions
 // ===================================
 
+// Links to source files
 :lemon_md: pass:q[link:./lemon.md[`lemon.md`,title="Read documentation"]]
 :lemon_c: pass:q[link:./lemon.c[`lemon.c`,title="View source file"]]
 :lempar_c: pass:q[link:./lempar.c[`lempar.c`,title="View source file"]]
 
+// Links to folders
+:examples: pass:q[link:./examples/[`examples/`,title="Navigate to folder"]]
+
+// Upstream sources
 :lemon_c_upstream: pass:q[link:https://www.sqlite.org/src/file/tool/lemon.c[`tool/lemon.c`^,title="View upstream source file"]]
 :lempar_c_upstream: pass:q[link:https://www.sqlite.org/src/file/tool/lempar.c[`tool/lempar.c`^,title="View upstream source file"]]
 
 :1caff0fb: link:https://www.sqlite.org/src/info/1caff0fb0b2051e2[1caff0fb,title="View upstream file"]
 :70fe8ec2: link:https://www.sqlite.org/src/info/70fe8ec2ae3099b8[70fe8ec2,title="View upstream file"]
 
+// 3rd Party tools:
 :SQLite: link:http://www.sqlite.org/[SQLite^,title="Visit SQLite website"]
 
 // *****************************************************************************
@@ -62,6 +68,10 @@ The Lemon parser generator, created by D. Richard Hipp, public domain.
 {lemon_c}   :: the parser generator program.
 {lempar_c}  :: the template for the parser generator.
 {lemon_md}  :: Lemon documentation.
+
+Some user contributed examples on how to use Lemon can be found in the subfolder:
+
+* {examples}
 
 // >>> GitLab/GitHub hacks to ensure TOC is shown after Preamble: >>>>>>>>>>>>>>
 ifndef::backend-html5[]

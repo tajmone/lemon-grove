@@ -32,8 +32,6 @@ Last edited: 2019/04/24
     - [Precedence Rules](#precedence-rules)
     - [Special Directives](#special-directives)
     - [Error Processing](#error-processing)
-- [Examples](#examples)
-  - [Calculator](#calculator)
 
 <!-- /MarkdownTOC -->
 
@@ -703,51 +701,6 @@ After extensive experimentation over several years, it has been discovered that 
 When a Lemon-generated parser encounters a syntax error, it first invokes the code specified by the `%syntax_error` directive, if any. It then enters its error recovery strategy. The error recovery strategy is to begin popping the parsers stack until it enters a state where it is permitted to shift a special non-terminal symbol named "error". It then shifts this non-terminal and continues parsing. The `%syntax_error` routine will not be called again until at least three new tokens have been successfully shifted.
 
 If the parser pops its stack until the stack is empty, and it still is unable to shift the error symbol, then the `%parse_failure` routine is invoked and the parser resets itself to its start state, ready to begin parsing a new file. This is what will happen at the very first syntax error, of course, if there are no instances of the "error" non-terminal in your grammar.
-
-
-## Examples
-
-### Calculator
-
-This is a very simple calculator. To compile the program go to `examples/calc` directory and do the following:
-```sh
-$ make
-```
-
-Then, to run the example issue the following command:
-```sh
-./calc
-```
-
-Let's explain what is actually happening: Take a look at the file `main.c`, then, take a look at `calc.c`. The `main.c` file is appended to the raw form of `calc.c` in the `Makefile`. lemon does not create a complete program - only the necessary subroutines. So it is necessary to build in the main part of a program.
-
-If you make your own changes to this example program, you should make the changes to `calc.y` or `main.c`. `calc.c` and `calc.h` are auto-generated files, and they will be over-written every time lemon is run.
-
-Disecting `main.c`: These are the  essential functions that must be called. Note, this is a stripped down simple version with no error checking or tokenizer. The tokens are hardwired in so we can see exactly how lemon operates.
-
-```c
-void* pParser = ParseAlloc (malloc);
-```
-
-The next 4 lines parse the command  `15 DIVIDE 5`.
-
-```c
-Parse (pParser, INTEGER, 15);
-Parse (pParser, DIVIDE, 0);
-Parse (pParser, INTEGER, 5);
-Parse (pParser, 0, 0);
-```
-
-`INTEGER` and `DIVIDE` are assigned values in the generated file `cacl.h` to be the following;
-```c
-#define PLUS    1
-#define MINUS   2
-#define DIVIDE  3
-#define TIMES   4
-#define INTEGER 5
-```
-
-Again, this is a generated file, so if any additions are made to this file, they'll be over-written when re-running lemon.
 
 <!-----------------------------------------------------------------------------
                                REFERENCE LINKS
