@@ -4,6 +4,16 @@ Lemon is an LALR(1) parser generator for C. It does the same job as "bison" and 
 
 This document is an introduction to the Lemon parser generator.
 
+<!-----------------------------------------------------------------------------
+Original document downloaded on 2019/04/23 from SQLite website:
+    https://sqlite.org/src/doc/trunk/doc/lemon.html
+
+Converted from html to GFM by Tristano Ajmone for the "Lemon Grove" project:
+    https://github.com/tajmone/lemon-grove
+
+Last edited: 2019/04/24
+------------------------------------------------------------------------------>
+
 -----
 
 **Table of Contents**
@@ -78,7 +88,7 @@ Depending on command-line options, Lemon will generate up to three output files.
 
 By default, all three of these output files are generated. The header file is suppressed if the "-m" command-line option is used and the report file is omitted when "-q" is selected.
 
-The grammar specification file uses a ".y" suffix, by convention. In the examples used in this document, we’ll assume the name of the grammar file is "`gram.y`". A typical use of Lemon would be the following command:
+The grammar specification file uses a "`.y`" suffix, by convention. In the examples used in this document, we’ll assume the name of the grammar file is "`gram.y`". A typical use of Lemon would be the following command:
 
     lemon gram.y
 
@@ -93,20 +103,19 @@ The behavior of Lemon can be modified using command-line options. You can obtain
 
 As of this writing, the following command-line options are supported:
 
-- **-b** Show only the basis for each parser state in the report file.
-- **-c** Do not compress the generated action tables. The parser will be a little larger and slower, but it will detect syntax errors sooner.
-- **-d**_directory_ Write all output files into *directory*. Normally, output files are written into the directory that contains the input grammar file.
-- **-D**_name_ Define C preprocessor macro *name*. This macro is usable by `%ifdef` and `%ifndef` lines in the grammar file.
-- **-g** Do not generate a parser. Instead write the input grammar to standard output with all comments, actions, and other extraneous text removed.
-- **-l** Omit `#line` directives in the generated parser C code.
-- **-m** Cause the output C source code to be compatible with the "makeheaders" program.
-- **-p** Display all conflicts that are resolved by [precedence rules].
-- **-q** Suppress generation of the report file.
-- **-r** Do not sort or renumber the parser states as part of optimization.
-- **-s** Show parser statistics before existing.
-- **-T**_file_ Use *file* as the template for the generated C-code parser implementation.
-- **-x** Print the Lemon version number.
-
+- **-b** — Show only the basis for each parser state in the report file.
+- **-c** — Do not compress the generated action tables. The parser will be a little larger and slower, but it will detect syntax errors sooner.
+- **-d**_directory_ — Write all output files into *directory*. Normally, output files are written into the directory that contains the input grammar file.
+- **-D**_name_ — Define C preprocessor macro *name*. This macro is usable by `%ifdef` and `%ifndef` lines in the grammar file.
+- **-g** — Do not generate a parser. Instead write the input grammar to standard output with all comments, actions, and other extraneous text removed.
+- **-l** — Omit `#line` directives in the generated parser C code.
+- **-m** — Cause the output C source code to be compatible with the "makeheaders" program.
+- **-p** — Display all conflicts that are resolved by [precedence rules].
+- **-q** — Suppress generation of the report file.
+- **-r** — Do not sort or renumber the parser states as part of optimization.
+- **-s** — Show parser statistics before existing.
+- **-T**_file_ — Use *file* as the template for the generated C-code parser implementation.
+- **-x** — Print the Lemon version number.
 
 ### The Parser Interface
 
@@ -118,7 +127,7 @@ Before a program begins using a Lemon-generated parser, the program must first c
 void *pParser = ParseAlloc( malloc );
 ```
 
-The `ParseAlloc()` routine allocates and initializes a new parser and returns a pointer to it. The actual data structure used to represent a parser is opaque — its internal structure is not visible or usable by the calling routine. For this reason, the `ParseAlloc()` routine returns a pointer to void rather than a pointer to some particular structure. The sole argument to the `ParseAlloc()` routine is a pointer to the subroutine used to allocate memory. Typically this means malloc().
+The `ParseAlloc()` routine allocates and initializes a new parser and returns a pointer to it. The actual data structure used to represent a parser is opaque — its internal structure is not visible or usable by the calling routine. For this reason, the `ParseAlloc()` routine returns a pointer to void rather than a pointer to some particular structure. The sole argument to the `ParseAlloc()` routine is a pointer to the subroutine used to allocate memory. Typically this means `malloc()`.
 
 After a program is finished using a parser, it can reclaim all memory allocated by that parser by calling
 
@@ -162,9 +171,9 @@ ParseTree *ParseFile(const char *zFilename){
 }
 ```
 
-This example shows a user-written routine that parses a file of text and returns a pointer to the parse tree. (All error-handling code is omitted from this example to keep it simple.) We assume the existence of some kind of tokenizer which is created using `TokenizerCreate()` on line 8 and deleted by `TokenizerFree()` on line 16. The `GetNextToken()` function on line 11 retrieves the next token from the input file and puts its type in the integer variable hTokenId. The sToken variable is assumed to be some kind of structure that contains details about each token, such as its complete text, what line it occurs on, etc.
+This example shows a user-written routine that parses a file of text and returns a pointer to the parse tree. (All error-handling code is omitted from this example to keep it simple.) We assume the existence of some kind of tokenizer which is created using `TokenizerCreate()` on line 8 and deleted by `TokenizerFree()` on line 16. The `GetNextToken()` function on line 11 retrieves the next token from the input file and puts its type in the integer variable `hTokenId`. The `sToken` variable is assumed to be some kind of structure that contains details about each token, such as its complete text, what line it occurs on, etc.
 
-This example also assumes the existence of structure of type ParserState that holds state information about a particular parse. An instance of such a structure is created on line 6 and initialized on line 10. A pointer to this structure is passed into the `Parse()` routine as the optional 4th argument. The action routine specified by the grammar for the parser can use the ParserState structure to hold whatever information is useful and appropriate. In the example, we note that the treeRoot field of the ParserState structure is left pointing to the root of the parse tree.
+This example also assumes the existence of structure of type `ParserState` that holds state information about a particular parse. An instance of such a structure is created on line 6 and initialized on line 10. A pointer to this structure is passed into the `Parse()` routine as the optional 4th argument. The action routine specified by the grammar for the parser can use the `ParserState` structure to hold whatever information is useful and appropriate. In the example, we note that the `treeRoot` field of the `ParserState` structure is left pointing to the root of the parse tree.
 
 The core of this example as it relates to Lemon is as follows:
 
@@ -187,7 +196,7 @@ There is one other interface routine that should be mentioned before we move on.
 ParseTrace(FILE *stream, char *zPrefix);
 ```
 
-After this routine is called, a short (one-line) message is written to the designated output stream every time the parser changes states or calls an action routine. Each such message is prefaced using the text given by zPrefix. This debugging output can be turned off by calling `ParseTrace()` again with a first argument of NULL (0).
+After this routine is called, a short (one-line) message is written to the designated output stream every time the parser changes states or calls an action routine. Each such message is prefaced using the text given by `zPrefix`. This debugging output can be turned off by calling `ParseTrace()` again with a first argument of NULL (0).
 
 
 ### Differences With YACC and BISON
@@ -200,7 +209,9 @@ Programmers who have previously used the yacc or bison parser generator will not
 
 These differences may cause some initial confusion for programmers with prior yacc and bison experience. But after years of experience using Lemon, I firmly believe that the Lemon way of doing things is better.
 
-*Updated as of 2016-02-16:* The text above was written in the 1990s. We are told that Bison has lately been enhanced to support the tokenizer-calls-parser paradigm used by Lemon, and to obviate the need for global variables.
+<!-- convert to note block: -->
+
+> *Updated as of 2016-02-16:* The text above was written in the 1990s. We are told that Bison has lately been enhanced to support the tokenizer-calls-parser paradigm used by Lemon, and to obviate the need for global variables.
 
 
 ## Input File Syntax
@@ -223,7 +234,7 @@ Yacc and bison allow terminal symbols to have either alphanumeric names or to be
 
 The main component of a Lemon grammar file is a sequence of grammar rules. Each grammar rule consists of a nonterminal symbol followed by the special symbol `::=` and then a list of terminals and/or nonterminals. The rule is terminated by a period. The list of terminals and nonterminals on the right-hand side of the rule can be empty. Rules can occur in any order, except that the left-hand side of the first rule is assumed to be the start symbol for the grammar (unless specified otherwise using the `%start_symbol` directive described below.) A typical sequence of grammar rules might look something like this:
 
-``` highlight
+``` lemon-grammar
 expr ::= expr PLUS expr.
 expr ::= expr TIMES expr.
 expr ::= LPAREN expr RPAREN.
@@ -232,9 +243,9 @@ expr ::= VALUE.
 
 There is one non-terminal in this example, "expr", and five terminal symbols or tokens: "PLUS", "TIMES", "LPAREN", "RPAREN" and "VALUE".
 
-Like yacc and bison, Lemon allows the grammar to specify a block of C code that will be executed whenever a grammar rule is reduced by the parser. In Lemon, this action is specified by putting the C code (contained within curly braces `{…​}`) immediately after the period that closes the rule. For example:
+Like yacc and bison, Lemon allows the grammar to specify a block of C code that will be executed whenever a grammar rule is reduced by the parser. In Lemon, this action is specified by putting the C code (contained within curly braces `{`…​`}`) immediately after the period that closes the rule. For example:
 
-``` highlight
+``` lemon-grammar
 expr ::= expr PLUS expr.   { printf("Doing an addition...\n"); }
 ```
 
@@ -248,7 +259,7 @@ expr -> expr PLUS expr  { $$ = $1 + $3; };
 
 But in Lemon, the same rule becomes the following:
 
-``` highlight
+``` lemon-grammar
 expr(A) ::= expr(B) PLUS expr(C).  { A = B+C; }
 ```
 
@@ -256,7 +267,7 @@ In the Lemon rule, any symbol in parentheses after a grammar rule symbol becomes
 
 The Lemon notation for linking a grammar rule with its reduce action is superior to yacc/bison on several counts. First, as mentioned above, the Lemon method avoids the need to count grammar symbols. Secondly, if a terminal or nonterminal in a Lemon grammar rule includes a linking symbol in parentheses but that linking symbol is not actually used in the reduce action, then an error message is generated. For example, the rule
 
-``` highlight
+``` lemon-grammar
 expr(A) ::= expr(B) PLUS expr(C).  { A = B; }
 ```
 
@@ -271,7 +282,7 @@ Lemon resolves parsing ambiguities in exactly the same way as yacc and bison. A 
 
 Just like in yacc and bison, Lemon allows a measure of control over the resolution of parsing conflicts using precedence rules. A precedence value can be assigned to any terminal symbol using the `%left`, `%right` or `%nonassoc` directives. Terminal symbols mentioned in earlier directives have a lower precedence than terminal symbols mentioned in later directives. For example:
 
-``` highlight
+``` lemon-grammar
 %left AND.
 %left OR.
 %nonassoc EQ NE GT GE LT LE.
@@ -282,37 +293,53 @@ Just like in yacc and bison, Lemon allows a measure of control over the resoluti
 
 In the preceding sequence of directives, the AND operator is defined to have the lowest precedence. The OR operator is one precedence level higher. And so forth. Hence, the grammar would attempt to group the ambiguous expression
 
-    a AND b OR c
+``` lemon-grammar
+a AND b OR c
+```
 
 like this
 
-    a AND (b OR c).
+``` lemon-grammar
+a AND (b OR c).
+```
 
 The associativity (left, right or nonassoc) is used to determine the grouping when the precedence is the same. AND is left-associative in our example, so
 
-    a AND b AND c
+``` lemon-grammar
+a AND b AND c
+```
 
 is parsed like this
 
-    a AND b) AND c.
+``` lemon-grammar
+(a AND b) AND c.
+```
 
 The EXP operator is right-associative, though, so
 
-    a EXP b EXP c
+``` lemon-grammar
+a EXP b EXP c
+```
 
 is parsed like this
 
-    a EXP (b EXP c).
+``` lemon-grammar
+a EXP (b EXP c).
+```
 
 The nonassoc precedence is used for non-associative operators. So
 
-    a EQ b EQ c
+``` lemon-grammar
+a EQ b EQ c
+```
 
 is an error.
 
-The precedence of non-terminals is transferred to rules as follows: The precedence of a grammar rule is equal to the precedence of the left-most terminal symbol in the rule for which a precedence is defined. This is normally what you want, but in those cases where you want to precedence of a grammar rule to be something different, you can specify an alternative precedence symbol by putting the symbol in square braces after the period at the end of the rule and before any C-code. For example:
+The precedence of non-terminals is transferred to rules as follows: The precedence of a grammar rule is equal to the precedence of the left-most terminal symbol in the rule for which a precedence is defined. This is normally what you want, but in those cases where you want the precedence of a grammar rule to be something different, you can specify an alternative precedence symbol by putting the symbol in square braces after the period at the end of the rule and before any C-code. For example:
 
-    expr = MINUS expr.  [NOT]
+``` lemon-grammar
+expr = MINUS expr.  [NOT]
+```
 
 This rule has a precedence equal to that of the NOT symbol, not the MINUS symbol as would have been the case by default.
 
@@ -339,6 +366,8 @@ The input grammar to Lemon consists of grammar rules and special directives. We�
 Directives in Lemon can occur in any order. You can put them before the grammar rules, or after the grammar rules, or in the midst of the grammar rules. It doesn’t matter. The relative order of directives used to assign precedence to terminals is important, but other than that, the order of directives in Lemon is arbitrary.
 
 Lemon supports the following special directives:
+
+<!-- convert entries into links: -->
 
 - `%code`
 - `%default_destructor`
@@ -403,13 +432,13 @@ The destructor can do whatever it wants with the value of the non-terminal, but 
 
 Consider an example:
 
-``` highlight
+``` lemon-grammar
 %type nt {void*}
 %destructor nt { free($$); }
 nt(A) ::= ID NUM.   { A = malloc( 100 ); }
 ```
 
-This example is a bit contrived, but it serves to illustrate how destructors work. The example shows a non-terminal named "nt" that holds values of type `void*`. When the rule for an "nt" reduces, it sets the value of the non-terminal to space obtained from malloc(). Later, when the nt non-terminal is popped from the stack, the destructor will fire and call free() on this malloced space, thus avoiding a memory leak. (Note that the symbol `$$` in the destructor code is replaced by the value of the non-terminal.)
+This example is a bit contrived, but it serves to illustrate how destructors work. The example shows a non-terminal named "nt" that holds values of type `void*`. When the rule for an "nt" reduces, it sets the value of the non-terminal to space obtained from `malloc()`. Later, when the nt non-terminal is popped from the stack, the destructor will fire and call `free()` on this malloced space, thus avoiding a memory leak. (Note that the symbol `$$` in the destructor code is replaced by the value of the non-terminal.)
 
 It is important to note that the value of a non-terminal is passed to the destructor whenever the non-terminal is removed from the stack, unless the non-terminal is used in a C-code action. If the non-terminal is used by C-code, then it is assumed that the C-code will take care of destroying it. More commonly, the value is used to build some larger structure, and we don’t want to destroy it, which is why the destructor is not called in this circumstance.
 
@@ -420,11 +449,11 @@ Destructors help avoid memory leaks by automatically freeing allocated objects w
 
 The `%extra_argument` directive instructs Lemon to add a 4th parameter to the parameter list of the `Parse()` function it generates. Lemon doesn’t do anything itself with this extra argument, but it does make the argument available to C-code action routines, destructors, and so forth. For example, if the grammar file contains:
 
-``` highlight
+``` lemon-grammar
 %extra_argument { MyStruct *pAbc }
 ```
 
-Then the `Parse()` function generated will have an 4th parameter of type `MyStruct*` and all action routines will have access to a variable named "pAbc" that is the value of the 4th parameter in the most recent call to `Parse()`.
+Then the `Parse()` function generated will have an 4th parameter of type `MyStruct*` and all action routines will have access to a variable named "`pAbc`" that is the value of the 4th parameter in the most recent call to `Parse()`.
 
 The `%extra_context` directive works the same except that it is passed in on the `ParseAlloc()` or `ParseInit()` routines instead of on `Parse()`.
 
@@ -433,11 +462,11 @@ The `%extra_context` directive works the same except that it is passed in on the
 
 The `%extra_context` directive instructs Lemon to add a 2th parameter to the parameter list of the `ParseAlloc()` and `ParseInif()` functions. Lemon doesn’t do anything itself with these extra argument, but it does store the value make it available to C-code action routines, destructors, and so forth. For example, if the grammar file contains:
 
-``` highlight
+``` lemon-grammar
 %extra_context { MyStruct *pAbc }
 ```
 
-Then the `ParseAlloc()` and `ParseInit()` functions will have an 2th parameter of type `MyStruct*` and all action routines will have access to a variable named "pAbc" that is the value of that 2th parameter.
+Then the `ParseAlloc()` and `ParseInit()` functions will have an 2th parameter of type `MyStruct*` and all action routines will have access to a variable named "`pAbc`" that is the value of that 2th parameter.
 
 The `%extra_argument` directive works the same except that it is passed in on the `Parse()` routine instead of on `ParseAlloc()`/`ParseInit()`.
 
@@ -450,7 +479,7 @@ The `%fallback` directive was added to support robust parsing of SQL syntax in [
 
 The syntax of `%fallback` is as follows:
 
-> `%fallback` *ID* *TOKEN…​* **.**
+> `%fallback` *ID TOKEN…​* .
 
 In words, the `%fallback` directive is followed by a list of token names terminated by a period. The first token name is the fallback token — the token to which all the other tokens fall back to. The second and subsequent arguments are tokens which fall back to the token identified by the first argument.
 
@@ -459,7 +488,7 @@ In words, the `%fallback` directive is followed by a list of token names termina
 
 The `%ifdef`, `%ifndef`, and `%endif` directives are similar to `#ifdef`, `#ifndef`, and `#endif` in the C-preprocessor, just not as general. Each of these directives must begin at the left margin. No whitespace is allowed between the `%` and the directive name.
 
-Grammar text in between `%ifdef MACRO` and the next nested `%endif` is ignored unless the "-DMACRO" command-line option is used. Grammar text betwen `%ifndef MACRO` and the next nested "%endif" is included except when the "-DMACRO" command-line option is used.
+Grammar text in between `%ifdef MACRO` and the next nested `%endif` is ignored unless the "-DMACRO" command-line option is used. Grammar text betwen `%ifndef MACRO` and the next nested `%endif` is included except when the "-DMACRO" command-line option is used.
 
 Note that the argument to `%ifdef` and `%ifndef` must be a single preprocessor symbol name, not a general expression. There is no `%else` directive.
 
@@ -470,7 +499,7 @@ The `%include` directive specifies C code that is included at the top of the gen
 
 The `%include` directive is very handy for getting some extra `#include` preprocessor statements at the beginning of the generated parser. For example:
 
-``` highlight
+``` lemon-grammar
 %include {#include <unistd.h>}
 ```
 
@@ -481,9 +510,9 @@ Use the `%code` directive to add code to the end of the generated parser.
 
 #### The `%left` directive
 
-The `%left` directive is used (along with the `%right` and `%nonassoc` directives) to declare precedences of terminal symbols. Every terminal symbol whose name appears after a `%left` directive but before the next period (".") is given the same left-associative precedence value. Subsequent `%left` directives have higher precedence. For example:
+The `%left` directive is used (along with the `%right` and `%nonassoc` directives) to declare precedences of terminal symbols. Every terminal symbol whose name appears after a `%left` directive but before the next period (`.`) is given the same left-associative precedence value. Subsequent `%left` directives have higher precedence. For example:
 
-``` highlight
+``` lemon-grammar
 %left AND.
 %left OR.
 %nonassoc EQ NE GT GE LT LE.
@@ -501,7 +530,7 @@ LALR(1) grammars can get into a situation where they require a large amount of s
 
 By default, the functions generated by Lemon all begin with the five-character string "Parse". You can change this string to something different using the `%name` directive. For instance:
 
-``` highlight
+``` lemon-grammar
 %name Abcde
 ```
 
@@ -526,7 +555,7 @@ The `%parse_accept` directive specifies a block of C code that is executed whene
 
 For example:
 
-``` highlight
+``` lemon-grammar
 %parse_accept {
   printf("parsing complete!\n");
 }
@@ -537,7 +566,7 @@ For example:
 
 The `%parse_failure` directive specifies a block of C code that is executed whenever the parser fails complete. This code is not executed until the parser has tried and failed to resolve an input error using is usual error recovery strategy. The routine is only invoked when parsing is unable to continue.
 
-``` highlight
+``` lemon-grammar
 %parse_failure {
   fprintf(stderr,"Giving up.  Parser is hopelessly lost...\n");
 }
@@ -553,7 +582,7 @@ This directive is used to assign right-associative precedence to one or more ter
 
 The `%stack_overflow` directive specifies a block of C code that is executed if the parser’s internal stack ever overflows. Typically this just prints an error message. After a stack overflow, the parser will be unable to continue and must be reset.
 
-``` highlight
+``` lemon-grammar
 %stack_overflow {
   fprintf(stderr,"Giving up.  Parser stack overflow\n");
 }
@@ -561,14 +590,14 @@ The `%stack_overflow` directive specifies a block of C code that is executed if 
 
 You can help prevent parser stack overflows by avoiding the use of right recursion and right-precedence operators in your grammar. Use left recursion and and left-precedence operators instead to encourage rules to reduce sooner and keep the stack size down. For example, do rules like this:
 
-``` highlight
+``` lemon-grammar
 list ::= list element.      // left-recursion.  Good!
 list ::= .
 ```
 
 Not like this:
 
-``` highlight
+``` lemon-grammar
 list ::= element list.      // right-recursion.  Bad!
 list ::= .
 ```
@@ -578,7 +607,7 @@ list ::= .
 
 If stack overflow is a problem and you can’t resolve the trouble by using left-recursion, then you might want to increase the size of the parser’s stack using this directive. Put an positive integer after the `%stack_size` directive and Lemon will generate a parse with a stack of the requested size. The default value is 100.
 
-``` highlight
+``` lemon-grammar
 %stack_size 2000
 ```
 
@@ -587,7 +616,7 @@ If stack overflow is a problem and you can’t resolve the trouble by using left
 
 By default, the start symbol for the grammar that Lemon generates is the first non-terminal that appears in the grammar file. But you can choose a different start symbol using the `%start_symbol` directive.
 
-``` highlight
+``` lemon-grammar
 %start_symbol  prog
 ```
 
@@ -615,7 +644,7 @@ Lemon generates `#defines` that assign small integer constants to each terminal 
 
 So if the default output of Lemon looked like this:
 
-``` highlight
+``` c
 #define AND              1
 #define MINUS            2
 #define OR               3
@@ -624,13 +653,13 @@ So if the default output of Lemon looked like this:
 
 You can insert a statement into the grammar like this:
 
-``` highlight
+``` lemon-grammar
 %token_prefix    TOKEN_
 ```
 
 to cause Lemon to produce these symbols instead:
 
-``` highlight
+``` c
 #define TOKEN_AND        1
 #define TOKEN_MINUS      2
 #define TOKEN_OR         3
@@ -642,7 +671,7 @@ to cause Lemon to produce these symbols instead:
 
 These directives are used to specify the data types for values on the parser’s stack associated with terminal and non-terminal symbols. The values of all terminal symbols must be of the same type. This turns out to be the same data type as the 3rd parameter to the `Parse()` function generated by Lemon. Typically, you will make the value of a terminal symbol by a pointer to some kind of token structure. Like this:
 
-``` highlight
+``` lemon-grammar
 %token_type    {Token*}
 ```
 
@@ -650,7 +679,7 @@ If the data type of terminals is not specified, the default value is `void*`.
 
 Non-terminal symbols can each have their own data types. Typically the data type of a non-terminal is a pointer to the root of a parse tree structure that contains all information about that non-terminal. For example:
 
-``` highlight
+``` lemon-grammar
 %type   expr  {Expr*}
 ```
 
