@@ -1,7 +1,10 @@
 # Lemon Grove
 
+- https://github.com/tajmone/lemon-grove
+
 The original Lemon parser generator, along with sibling projects, forks and assets — all in one place.
 
+Project maintained by [Tristano Ajmone] since 2019/04/23.
 
 -----
 
@@ -11,6 +14,12 @@ The original Lemon parser generator, along with sibling projects, forks and asse
 
 - [About Lemon](#about-lemon)
 - [Project Contents](#project-contents)
+- [Useful Links](#useful-links)
+    - [Editors Support for Lemon](#editors-support-for-lemon)
+        - [Atom](#atom)
+        - [Emacs](#emacs)
+        - [Sublime Text](#sublime-text)
+        - [Vim](#vim)
 
 <!-- /MarkdownTOC -->
 
@@ -32,6 +41,7 @@ There are several important differences:
 
 The complete source code to the lemon parser generator is contained in two files.
 
+
 # Project Contents
 
 Currently, this repository contains only the official Lemon sources.
@@ -42,13 +52,66 @@ Currently, this repository contains only the official Lemon sources.
     + [`lemon.md`](./lemon/lemon.md) — documentation.
 
 
+# Useful Links
 
+External links to useful third party Lemon-assets.
+
+
+## Editors Support for Lemon
+
+Packages/plugins for adding support for Lemon grammar files to various editors.
+
+Missing packages? Please add them via pull request, or [open an issue] and provide a link.
+
+### Atom
+
+- https://github.com/kyursen/language-lemon
+
+By [Yursen Kim], MIT License.
+
+> Adds syntax highlighting to Lemon Parser Generator files in Atom.
+
+### Emacs
+
+- https://github.com/mooz/lemon-mode
+
+By [Masafumi Oyamada], GNU GPL v3.
+
+> Emacs major mode for editing LEMON grammar files.
+
+### Sublime Text
+
+- https://github.com/ksherlock/sublime-lemon
+
+By [@ksherlock], no license provided.
+
+> Sublime Text 3 syntax file for the Lemon parser generator.
+
+### Vim
+
+- https://github.com/dccmx/vim-lemon-syntax
+- https://github.com/vim-scripts/lemon.vim
+
+By [dccmx], MIT License.
+
+> Crappy syntax highlighting in Vim for Lemon Parser Generator grammars.
 
 <!-----------------------------------------------------------------------------
                                REFERENCE LINKS                                
 ------------------------------------------------------------------------------>
 
+[open an issue]: https://github.com/tajmone/lemon-grove/issues/new "Click to open a new issue..."
+
+<!-- 3rd party tools -->
+
 [SQLite]: https://www.sqlite.org/index.html "Visit SQLite website"
 
+<!-- people -->
+
+[@ksherlock]: https://github.com/ksherlock "View @ksherlock's GitHub profile"
+[dccmx]: https://github.com/dccmx "View dccmx's GitHub profile"
+[Masafumi Oyamada]: http://mooz.github.io/ "Visit Masafumi Oyamada's website"
+[Tristano Ajmone]: https://github.com/tajmone "View Tristano Ajmone's GitHub profile"
+[Yursen Kim]: https://github.com/kyursen "View Yursen Kim's GitHub profile"
 
 <!-- EOF -->
