@@ -18,7 +18,7 @@ Last edited: 2019/04/24
 
 **Table of Contents**
 
-<!-- MarkdownTOC autolink="true" bracket="round" autoanchor="false" lowercase="only_ascii" uri_encoding="true" levels="1,2,3,4" -->
+<!-- MarkdownTOC autolink="true" bracket="round" autoanchor="false" lowercase="only_ascii" levels="1,2,3,4" -->
 
 - [Security Note](#security-note)
 - [Theory of Operation](#theory-of-operation)
