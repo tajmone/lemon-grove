@@ -10,6 +10,7 @@
 ## ============
 *.c   text
 *.h   text
+*.y   text
 
 ## =============
 ## Shell scripts
@@ -43,6 +44,7 @@ readme         text
 ## ===================
 ## Configuration files
 ## ===================
+*.yaml         text
 *.cnf          text
 *.conf         text
 *.config       text
