@@ -14,11 +14,12 @@ Converted from html to GFM by Tristano Ajmone for the "Lemon Grove" project:
 Last edited: 2019/04/24
 ------------------------------------------------------------------------------>
 
+
 -----
 
 **Table of Contents**
 
-<!-- MarkdownTOC autolink="true" bracket="round" autoanchor="true" lowercase="only_ascii" levels="1,2,3,4" -->
+<!-- MarkdownTOC autolink="true" bracket="round" autoanchor="false" lowercase="only_ascii" uri_encoding="true" levels="1,2, 3" -->
 
 - [Security Note](#security-note)
 - [Theory of Operation](#theory-of-operation)
@@ -30,30 +31,6 @@ Last edited: 2019/04/24
     - [Grammar Rules](#grammar-rules)
     - [Precedence Rules](#precedence-rules)
     - [Special Directives](#special-directives)
-        - [The `%code` directive](#the-%25code-directive)
-        - [The `%default_destructor` directive](#the-%25default_destructor-directive)
-        - [The `%default_type` directive](#the-%25default_type-directive)
-        - [The `%destructor` directive](#the-%25destructor-directive)
-        - [The `%extra_argument` directive](#the-%25extra_argument-directive)
-        - [The `%extra_context` directive](#the-%25extra_context-directive)
-        - [The `%fallback` directive](#the-%25fallback-directive)
-        - [The `%ifdef`, `%ifndef`, and `%endif` directives](#the-%25ifdef-%25ifndef-and-%25endif-directives)
-        - [The `%include` directive](#the-%25include-directive)
-        - [The `%left` directive](#the-%25left-directive)
-        - [The `%name` directive](#the-%25name-directive)
-        - [The `%nonassoc` directive](#the-%25nonassoc-directive)
-        - [The `%parse_accept` directive](#the-%25parse_accept-directive)
-        - [The `%parse_failure` directive](#the-%25parse_failure-directive)
-        - [The `%right` directive](#the-%25right-directive)
-        - [The `%stack_overflow` directive](#the-%25stack_overflow-directive)
-        - [The `%stack_size` directive](#the-%25stack_size-directive)
-        - [The `%start_symbol` directive](#the-%25start_symbol-directive)
-        - [The `%syntax_error` directive](#the-%25syntax_error-directive)
-        - [The `%token_class` directive](#the-%25token_class-directive)
-        - [The `%token_destructor` directive](#the-%25token_destructor-directive)
-        - [The `%token_prefix` directive](#the-%25token_prefix-directive)
-        - [The `%token_type` and `%type` directives](#the-%25token_type-and-%25type-directives)
-        - [The `%wildcard` directive](#the-%25wildcard-directive)
     - [Error Processing](#error-processing)
 
 <!-- /MarkdownTOC -->
@@ -61,7 +38,6 @@ Last edited: 2019/04/24
 -----
 
 
-<a id="security-note"></a>
 ## Security Note
 
 The language parser code created by Lemon is very robust and is well-suited for use in internet-facing applications that need to safely process maliciously crafted inputs.
@@ -72,7 +48,6 @@ The "`lemon.exe`" command-line tool itself works great when given a valid input 
 - The "`lemon.exe`" command line tool itself → Not so much
 
 
-<a id="theory-of-operation"></a>
 ## Theory of Operation
 
 The main goal of Lemon is to translate a context free grammar (CFG) for a particular language into C code that implements a parser for that language. The program has two inputs:
@@ -97,7 +72,6 @@ The grammar specification file uses a "`.y`" suffix, by convention. In the examp
 This command will generate three output files named "`gram.c`", "`gram.h`" and "`gram.out`". The first is C code to implement the parser. The second is the header file that defines numerical values for all terminal symbols, and the last is the report that explains the states used by the parser automaton.
 
 
-<a id="command-line-options"></a>
 ### Command Line Options
 
 The behavior of Lemon can be modified using command-line options. You can obtain a list of the available command-line options together with a brief explanation of what each does by typing
@@ -120,7 +94,6 @@ As of this writing, the following command-line options are supported:
 - **-T**_file_ — Use *file* as the template for the generated C-code parser implementation.
 - **-x** — Print the Lemon version number.
 
-<a id="the-parser-interface"></a>
 ### The Parser Interface
 
 Lemon doesn’t generate a complete, working program. It only generates a few subroutines that implement a parser. This section describes the interface to those subroutines. It is up to the programmer to call these subroutines in an appropriate way in order to produce a complete system.
@@ -203,7 +176,6 @@ ParseTrace(FILE *stream, char *zPrefix);
 After this routine is called, a short (one-line) message is written to the designated output stream every time the parser changes states or calls an action routine. Each such message is prefaced using the text given by `zPrefix`. This debugging output can be turned off by calling `ParseTrace()` again with a first argument of NULL (0).
 
 
-<a id="differences-with-yacc-and-bison"></a>
 ### Differences With YACC and BISON
 
 Programmers who have previously used the yacc or bison parser generator will notice several important differences between yacc and/or bison and Lemon.
@@ -219,7 +191,6 @@ These differences may cause some initial confusion for programmers with prior ya
 > *Updated as of 2016-02-16:* The text above was written in the 1990s. We are told that Bison has lately been enhanced to support the tokenizer-calls-parser paradigm used by Lemon, and to obviate the need for global variables.
 
 
-<a id="input-file-syntax"></a>
 ## Input File Syntax
 
 The main purpose of the grammar specification file for Lemon is to define the grammar for the parser. But the input file also specifies additional information Lemon requires to do its job. Most of the work in using Lemon is in writing an appropriate grammar file.
@@ -227,7 +198,6 @@ The main purpose of the grammar specification file for Lemon is to define the gr
 The grammar file for Lemon is, for the most part, free format. It does not have sections or divisions like yacc or bison. Any declaration can occur at any point in the file. Lemon ignores whitespace (except where it is needed to separate tokens), and it honors the same commenting conventions as C and C++.
 
 
-<a id="terminals-and-nonterminals"></a>
 ### Terminals and Nonterminals
 
 A terminal symbol (token) is any string of alphanumeric and/or underscore characters that begins with an uppercase letter. A terminal can contain lowercase letters after the first character, but the usual convention is to make terminals all uppercase. A nonterminal, on the other hand, is any string of alphanumeric and underscore characters than begins with a lowercase letter. Again, the usual convention is to make nonterminals use all lowercase letters.
@@ -237,7 +207,6 @@ In Lemon, terminal and nonterminal symbols do not need to be declared or identif
 Yacc and bison allow terminal symbols to have either alphanumeric names or to be individual characters included in single quotes, like this: `')'` or `'$'`. Lemon does not allow this alternative form for terminal symbols. With Lemon, all symbols, terminals and nonterminals, must have alphanumeric names.
 
 
-<a id="grammar-rules"></a>
 ### Grammar Rules
 
 The main component of a Lemon grammar file is a sequence of grammar rules. Each grammar rule consists of a nonterminal symbol followed by the special symbol `::=` and then a list of terminals and/or nonterminals. The rule is terminated by a period. The list of terminals and nonterminals on the right-hand side of the rule can be empty. Rules can occur in any order, except that the left-hand side of the first rule is assumed to be the start symbol for the grammar (unless specified otherwise using the `%start_symbol` directive described below.) A typical sequence of grammar rules might look something like this:
@@ -284,7 +253,6 @@ will generate an error because the linking symbol "C" is used in the grammar rul
 The Lemon notation for linking grammar rules to reduce actions also facilitates the use of destructors for reclaiming memory allocated by the values of terminals and nonterminals on the right-hand side of a rule.
 
 
-<a id="precedence-rules"></a>
 ### Precedence Rules
 
 Lemon resolves parsing ambiguities in exactly the same way as yacc and bison. A shift-reduce conflict is resolved in favor of the shift, and a reduce-reduce conflict is resolved by reducing whichever rule comes first in the grammar file.
@@ -368,7 +336,6 @@ Reduce-reduce conflicts are resolved this way:
 - Otherwise, resolve the conflict by reducing by the rule that appears first in the grammar, and report a parsing conflict.
 
 
-<a id="special-directives"></a>
 ### Special Directives
 
 The input grammar to Lemon consists of grammar rules and special directives. We’ve described all the grammar rules, so now we’ll talk about the special directives.
@@ -727,7 +694,6 @@ The `%wildcard` directive is followed by a single token name and a period. This 
 When the generated parser has the choice of matching an input against the wildcard token and some other token, the other token is always used. The wildcard token is only matched if there are no alternatives.
 
 
-<a id="error-processing"></a>
 ### Error Processing
 
 After extensive experimentation over several years, it has been discovered that the error recovery strategy used by yacc is about as good as it gets. And so that is what Lemon uses.

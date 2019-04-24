@@ -6,11 +6,12 @@ The original Lemon parser generator, along with sibling projects, forks and asse
 
 Project maintained by [Tristano Ajmone] since 2019/04/23.
 
+
 -----
 
 **Table of Contents**
 
-<!-- MarkdownTOC autolink="true" bracket="round" autoanchor="false" lowercase="only_ascii" levels="1,2,3" -->
+<!-- MarkdownTOC autolink="true" bracket="round" autoanchor="false" lowercase="only_ascii" uri_encoding="true" levels="1,2,3" -->
 
 - [About Lemon](#about-lemon)
 - [Project Contents](#project-contents)
@@ -25,6 +26,7 @@ Project maintained by [Tristano Ajmone] since 2019/04/23.
 <!-- /MarkdownTOC -->
 
 -----
+
 
 # About Lemon
 
