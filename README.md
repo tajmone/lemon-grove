@@ -1,4 +1,5 @@
 # Lemon Grove
+[![Build Status][:badge-travis:]][:project-travis:]
 
 - https://github.com/tajmone/lemon-grove
 
@@ -112,6 +113,8 @@ By [@dccmx], MIT License.
 ------------------------------------------------------------------------------>
 
 [open an issue]: https://github.com/tajmone/lemon-grove/issues/new "Click to open a new issue..."
+[:badge-travis:]: https://travis-ci.com/tajmone/lemon-grove.svg?branch=master
+[:project-travis:]: https://travis-ci.com/tajmone/lemon-grove
 
 <!-- Lemon -->
 
