@@ -1,10 +1,10 @@
-# Contributors Guidelines
+# Contributors' Guidelines
 
 The goal of the Lemon Grove project is to provide a collection of Lemon forks, ports to other languages, examples and documentation — anything that Lemon nebies and veterans might wish to find in a single project. 
 
 The project is open to contributions and advice. I'd rather keep an open ended structure and let the repository be shaped by community needs and contributions than to adapt a rigid model.
 
-But here are some guidelines for contributors.
+But here are some general guidelines for contributors. Some project folders might contain specific guidelines on how their contents should be organized.
 
 # Licensing
 

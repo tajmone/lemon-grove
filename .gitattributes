@@ -51,6 +51,7 @@ readme         text
 *.ini          text
 *.prefs        text
 .editorconfig  text
+Makefile       text
 ## -------------
 ## Git settings:
 ## -------------
