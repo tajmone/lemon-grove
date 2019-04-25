@@ -4,6 +4,7 @@
 
 %include {
 #include <stdio.h>
+#include <stdlib.h> /* malloc, free */
 #include "calc.h"
 }
 
@@ -45,5 +46,8 @@ expr(A) ::= INTEGER(B). {
 }
 
 /* Local Variables: */
+/* c-basic-offset: 4 */
+/* tab-width: 4 */
+/* indent-tabs-mode: t */
 /* mode: lemon */
 /* End: */

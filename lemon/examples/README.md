@@ -12,11 +12,11 @@ A very simple calculator example, contributed by [Serghei Iakovlev], public doma
 
 Feel free to contribute your own examples. Each example should be in its own folder, to keep the repository well structured.
 
-All examples in this directory tree must compile against the Lemon version provided in the [parent folder]. To allow automation of the build & test process, each example folder should contain a Makefile with following targets:
+All examples in this directory tree must compile against the Lemon version provided in the [parent folder]. To allow automation of the build & test process, each example folder should contain a `Makefile` with following targets:
 
-- all
-- test
-- clean
+- `all`
+- `test`
+- `clean`
 
 For a practical example, see [`calc/Makefile`](./calc/Makefile).
 
@@ -26,7 +26,7 @@ See also [`../../CONTRIBUTING.md`](../../CONTRIBUTING.md)
 
 
 <!-----------------------------------------------------------------------------
-                               REFERENCE LINKS                                
+                               REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
 [parent folder]: ../
