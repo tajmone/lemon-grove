@@ -35,4 +35,6 @@ int main()
   Parse (pParser, 0, 0);
 
   ParseFree(pParser, free);
+
+  return 0;
 }

@@ -1,2 +1,29 @@
+dist: trusty
+
+language: c
+
+git:
+  depth: 1
+
+compiler:
+  - gcc
+  - clang
+
+cache:
+  apt: true
+  timeout: 604800
+
+before_script:
+  - $CC --version
+
 script:
-  - true
+  - |
+    set -e
+
+    for d in $(find $TRAVIS_BUILD_DIR/lemon/examples/* -type d) ; do
+        cd $d
+        make CC=$CC
+        make test
+        make clean
+        cd $TRAVIS_BUILD_DIR
+    done
