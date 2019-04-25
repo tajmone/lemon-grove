@@ -14,17 +14,17 @@ Licenses matter, and it's auspicable that anyone who comes across assets from th
 
 Besides adding a `LICENSE` file, adding to the source files header-comments about their author and the adopted license helps to preserve the usability of open source assets, even in the event that these files might start to circulate outside their original context, or get separated from their license file.
 
-We've all experienced the frustating situation of stumbling into great code that's hard to trace back its original author, and to determine its license terms. A simple comment block can dispell such situations.
+We've all experienced the frustrating situation of stumbling into great code that's hard to trace back its original author, and to determine its license terms. A simple comment block can dispell such situations.
 
 ## A Note on Public Domain
 
-Not all countries and jurisdictions reckognize the public domain. For this reason, it's always advisable to attach an explicit public domain license, like the [Unlicense] or [CC0], when intending to share your code and assets without restrictions.
+Not all countries and jurisdictions recognize the public domain. For this reason, it's always advisable to attach an explicit public domain license, like the [Unlicense] or [CC0], when intending to share your code and assets without restrictions.
 
 For more details on the difficulties on making code public domain, see: 
 
 - https://creativecommons.org/share-your-work/public-domain/cc0/
 
-By restorting to a public domain license, you are able to legally eforce the public domain status on your work, even in those countries which don't acknowledge public domain. 
+By resorting to a public domain license, you are able to legally enforce the public domain status on your work, even in those countries which don't acknowledge public domain.
 
 <!-----------------------------------------------------------------------------
                                REFERENCE LINKS                                
