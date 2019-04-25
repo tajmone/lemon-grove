@@ -8,6 +8,10 @@ In this directory tree you'll find some user-contributed examples on using Lemon
 
 A very simple calculator example, contributed by [Serghei Iakovlev], public domain.
 
+- [`/calc2/`](./calc2)
+
+A bit more complex calculator example, contributed by [Serghei Iakovlev], public domain.
+
 # Contributing Guidelines
 
 Feel free to contribute your own examples. Each example should be in its own folder, to keep the repository well structured.
