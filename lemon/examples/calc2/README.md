@@ -2,7 +2,7 @@
 
 > Contributed by [Serghei Iakovlev], public domain.
 
-A bit more complex calculator than in our [`previous example`]. To compile the program do the following:
+A bit more complex calculator than in our [`previous example`](../calc/). To compile the program do the following:
 
 ```sh
 $ make
@@ -47,5 +47,4 @@ This structure supports both a value and a count.  You could add many more value
                                REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
-[previous example]: ../calc/ "A very simple calculator"
 [Serghei Iakovlev]: https://github.com/sergeyklay "View Serghei Iakovlev's GitHub profile"
