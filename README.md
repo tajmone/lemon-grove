@@ -33,7 +33,7 @@ Project maintained by [Tristano Ajmone] since 2019/04/23.
 
 - http://www.hwaci.com/sw/lemon/
 
-The Lemon program is an LALR(1) parser generator.
+The Lemon program is an [LALR(1)]  [parser generator].
 It takes a context free grammar and converts it into a subroutine that will parse a file using that grammar.
 Lemon is similar to the much more famous programs "YACC" and "BISON".
 But lemon is not compatible with either yacc or bison.
@@ -48,15 +48,24 @@ The complete source code to the lemon parser generator is contained in two files
 
 # Project Contents
 
-Currently, this repository contains only the official Lemon sources.
+Currently, this repository contains only the official version of Lemon (public domain) taken from the [SQLite] project:
 
-- [`/lemon/`](./lemon/) — original Lemon (public domain) taken from [SQLite]:
+- [`/lemon/`](./lemon/) — original Lemon sources from [SQLite]:
+    + [`/examples/`](./lemon/examples) — user-contributed examples.
     + [`lemon.c`](./lemon/lemon.c) — parser generator program.
     + [`lempar.c`](./lemon/lempar.c) — template for the parser generator.
     + [`lemon.md`](./lemon/lemon.md) — documentation.
 
+The `examples/` subfolder contains third-party examples based on this version of Lemon (the examples are not from the SQLite project).
+
+There are many variations of the original Lemon code circulating over the Internet, and it's quite common to find tutorials and examples that rely on tweaked versions of Lemon, often in conjunction with other tools (like [re2c]).
+
+To avoid confusion, in this project all examples are kept together with the Lemon version for which they were designed. Different versions of Lemon (forks, ports, etc.) will be kept in separate folders, and each version will have its own `examples/` subfolder. The idea is to keep the Lemon Grove tidy and well structured, so that its users can easily distinguish which version of Lemon is where, and how to find examples for that specific version.
+
 
 # Useful Links
+
+- [Lemon on Wikipedia]
 
 ## Official Lemon
 
@@ -116,14 +125,21 @@ By [@dccmx], MIT License.
 [:badge-travis:]: https://travis-ci.com/tajmone/lemon-grove.svg?branch=master
 [:project-travis:]: https://travis-ci.com/tajmone/lemon-grove
 
+<!-- external references -->
+
+[LALR(1)]: https://en.wikipedia.org/wiki/LALR_parser "See Wikipedia page on LALR parser"
+[parser generator]: https://en.wikipedia.org/wiki/Compiler-compiler "See Wikipedia page on Compiler-compiler"
+
 <!-- Lemon -->
 
 [Lemon homepage]: http://www.hwaci.com/sw/lemon/ "Visit the official Lemon homepage"
 [Lemon documentation]: https://sqlite.org/src/doc/trunk/doc/lemon.html "Read the official Lemon documentation"
+[Lemon on Wikipedia]: https://en.wikipedia.org/wiki/Lemon_Parser_Generator "Read the Wikepida page for Lemon Parser Generator"
 
 <!-- 3rd party tools -->
 
 [Fossil]: https://www.fossil-scm.org/ "Visit Fossil website"
+[re2c]: http://re2c.org/ "Visit re2c website"
 [SQLite]: https://www.sqlite.org/index.html "Visit SQLite website"
 
 <!-- people -->

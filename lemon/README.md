@@ -1,6 +1,6 @@
 # The Lemon Parser Generator
 
-The Lemon parser generator, created by D. Richard Hipp, public domain.
+The Lemon parser generator, created by [D. Richard Hipp], public domain.
 
 - [`/examples/`][examples] — user contributed examples.
 - [`lemon.c`][lemon.c] — the parser generator program.
@@ -13,16 +13,20 @@ The Lemon parser generator, created by D. Richard Hipp, public domain.
 
 <!-- MarkdownTOC autolink="true" bracket="round" autoanchor="false" lowercase="only_ascii" uri_encoding="true" levels="1,2,3" -->
 
-- [About Lemon](#about-lemon)
+- [Meet Lemon](#meet-lemon)
+- [Lemon and SQLite](#lemon-and-sqlite)
+- [History of Lemon](#history-of-lemon)
 - [Files History and Sources](#files-history-and-sources)
 
 <!-- /MarkdownTOC -->
 
 -----
 
-# About Lemon
+# Meet Lemon
 
-The Lemon program is an LALR(1) parser generator.
+- http://www.hwaci.com/sw/lemon/
+
+The Lemon program is an [LALR(1)]  [parser generator].
 It takes a context free grammar and converts it into a subroutine that will parse a file using that grammar.
 Lemon is similar to the much more famous programs "[YACC]" and "[BISON]".
 But lemon is not compatible with either yacc or bison.
@@ -42,6 +46,37 @@ Both the source code to lemon itself and the code that lemon generates are in th
 To see an example of how to use lemon, see the source code to the [SQLite] database engine.
 Lemon is maintained as part of the SQLite project.
 
+
+# Lemon and SQLite
+
+- https://www.sqlite.org/lemon.html
+
+One of the advantages of hosting code generator tool as part of the project is that the tools can be optimized to serve specific needs of the overall project.
+Lemon has benefited from this effect.
+Over the years, the Lemon parser generator has been extended and enhanced to provide new capabilities and improved performance to SQLite. [...]
+
+The parsing of SQL statements is a significant consumer of CPU cycles in any SQL database engine.
+On-going efforts to optimize SQLite have caused the developers to spend a lot of time tweaking Lemon to generate faster parsers.
+These efforts have benefited all users of the Lemon parser generator, not just SQLite.
+But if Lemon had been a separately maintained tool, it would have been more difficulty to make coordinated changes to both SQLite and Lemon, and as a result not as much optimization would have been accomplished.
+Hence, the fact that the parser generator tool is included in the source tree for SQLite has turned out to be a net benefit for both the tool itself and for SQLite.
+
+
+# History of Lemon
+
+Lemon was original written by [D. Richard Hipp]  (also the creator of SQLite) while he was in graduate school at Duke University between 1987 and 1992.
+The original creation date of Lemon has been lost, but was probably sometime around 1990.
+Lemon generates an LALR(1) parser.
+There was companion LL(1) parser generator tool named "Lime", but the source code for Lime has been lost.
+
+The Lemon source code was originally written as separate source files, and only later merged into a single "`lemon.c`" source file.
+
+The author of Lemon and SQLite (Hipp) reports that his C programming skills were greatly enhanced by studying [John Ousterhout]’s original source code to [Tcl].
+Hipp discovered and studied Tcl in 1993.
+Lemon was written before then, and SQLite afterwards.
+There is a clear difference in the coding styles of these two products, with SQLite seeming to be cleaner, more readable, and easier to maintain.
+
+
 # Files History and Sources
 
 This folder contains the original, unmodified Lemon source files taken from the [SQLite] project on March 24th, 2019:
@@ -57,9 +92,8 @@ As well as the [official Lemon documentation], ported to markdown:
                                REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
-[SQLite]: http://www.sqlite.org/ "Visit SQLite website"
-[Bison]: https://www.gnu.org/software/bison/ "Visit GNU Bison website"
-[Yacc]: https://en.wikipedia.org/wiki/Yacc "Wikipedia page on Yacc"
+[LALR(1)]: https://en.wikipedia.org/wiki/LALR_parser "See Wikipedia page on LALR parser"
+[parser generator]: https://en.wikipedia.org/wiki/Compiler-compiler "See Wikipedia page on Compiler-compiler"
 
 <!-- project files -->
 
@@ -80,5 +114,17 @@ As well as the [official Lemon documentation], ported to markdown:
 [70fe8ec2]: https://www.sqlite.org/src/info/70fe8ec2ae3099b8 "View upstream commit"
 
 [official Lemon documentation]: https://sqlite.org/src/doc/trunk/doc/lemon.html "View original HTML documentation"
+
+<!-- 3rd party tools -->
+
+[SQLite]: http://www.sqlite.org/ "Visit SQLite website"
+[Bison]: https://www.gnu.org/software/bison/ "Visit GNU Bison website"
+[Yacc]: https://en.wikipedia.org/wiki/Yacc "Wikipedia page on Yacc"
+[Tcl]: https://www.tcl.tk/ "Visit Tcl website"
+
+<!-- people -->
+
+[D. Richard Hipp]: http://www.hwaci.com/drh/ "Visit D. Richard Hipp's website"
+[John Ousterhout]: https://web.stanford.edu/~ouster/cgi-bin/home.php "Visit John Ousterhout's web page at Stanford University"
 
 <!-- EOF -->
