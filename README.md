@@ -18,6 +18,14 @@ Project maintained by [Tristano Ajmone] since 2019/04/23.
 - [Project Contents](#project-contents)
 - [Useful Links](#useful-links)
     - [Official Lemon](#official-lemon)
+    - [Cross-Language Lemons](#cross-language-lemons)
+        - [Golemon \(Go\)](#golemon-go)
+        - [jlemon \(Java\)](#jlemon-java)
+        - [Lemon.JS](#lemonjs)
+        - [Lemon PHP](#lemon-php)
+        - [Lemon Rust](#lemon-rust)
+    - [Lemon Inspired](#lemon-inspired)
+        - [limecc \(Python\)](#limecc-python)
     - [Editors Support for Lemon](#editors-support-for-lemon)
         - [Atom](#atom)
         - [Emacs](#emacs)
@@ -65,11 +73,13 @@ To avoid confusion, in this project all examples are kept together with the Lemo
 
 # Useful Links
 
+External links to useful third party Lemon-assets.
+
 - [Lemon on Wikipedia]
 
 ## Official Lemon
 
-External links to useful third party Lemon-assets.
+The official Lemon code, actively maintained as part of the [SQLite] project.
 
 - [Lemon homepage]
 - [Lemon documentation]
@@ -77,6 +87,57 @@ External links to useful third party Lemon-assets.
     + [`lemon.c`](https://www.sqlite.org/src/file/tool/lemon.c)
     + [`lempar.c`](https://www.sqlite.org/src/file/tool/lempar.c)
     + [`lemon.html`](https://sqlite.org/src/doc/trunk/doc/lemon.html)
+
+## Cross-Language Lemons
+
+Lemon has been adapted to produce parser generators in other programming languages too, by tweaking its C source code and creating an _ad hoc_ version of `lempar.c` in the target language.
+
+### Golemon (Go)
+
+- https://github.com/nsf/golemon
+
+Created by [@nsf] in 2010, public domain.
+
+Outdate and no longer maintained, but a good starting point for anyone willing to revive the project.
+
+### jlemon (Java)
+
+- https://github.com/gwenn/jlemon
+
+Created by [@gwenn] in 2017, released into the public domain via [Unlicense].
+
+A fork of the LEMON parser generator that generates Java code and the associated SQL parser.
+
+### Lemon.JS
+
+- https://github.com/sormy/lemon-js
+
+Created by [Artem Butusov] in 2017, public domain.
+
+### Lemon PHP
+
+- https://github.com/wez/lemon-php
+
+Created by [Wez Furlong] in 2006, last updated in 2012, BSD-like license.
+
+### Lemon Rust
+
+- https://github.com/rodrigorc/lemon_rust
+
+Created by [Rodrigo Rivas Costa] in 2015, actively maintained, released under Apache-2.0 license.
+
+
+## Lemon Inspired
+
+Lemon has played an influencial role in the development of parser generators, serving as a model for the creation of similar tools. Here are links to some of them.
+
+### limecc (Python)
+
+- https://github.com/avakar/limecc
+
+By [Martin Vejnár], Boost Software License 1.0.
+
+limecc is a lexer and parser generator similar to other tools like yacc, bison and especially lemon from which limecc sources inspiration. Grammars are written in a language called Lime, which describes lexical tokens, grammar productions, and sematic actions. The generator produces C++ code for the corresponding lexer and parser.
 
 ## Editors Support for Lemon
 
@@ -142,12 +203,23 @@ By [@dccmx], MIT License.
 [re2c]: http://re2c.org/ "Visit re2c website"
 [SQLite]: https://www.sqlite.org/index.html "Visit SQLite website"
 
+<!-- Licenses -->
+
+[Unlicense]: https://unlicense.org/ "Visit unlicense.org"
+
 <!-- people -->
 
 [@dccmx]: https://github.com/dccmx "View @dccmx's GitHub profile"
+[@gwenn]: https://github.com/gwenn "View gwenn's GitHub profile"
 [@ksherlock]: https://github.com/ksherlock "View @ksherlock's GitHub profile"
+[@nsf]: https://github.com/nsf "View nsf's GitHub profile"
 [Masafumi Oyamada]: http://mooz.github.io/ "Visit Masafumi Oyamada's website"
+[Rodrigo Rivas Costa]: https://github.com/rodrigorc "View Rodrigo Rivas Costa's GitHub profile"
 [Tristano Ajmone]: https://github.com/tajmone "View Tristano Ajmone's GitHub profile"
+[Wez Furlong]: https://github.com/wez "View Wez Furlong's GitHub profile"
 [Yursen Kim]: https://github.com/kyursen "View Yursen Kim's GitHub profile"
+[Martin Vejnár]: https://github.com/avakar "View Martin Vejnár's GitHub profile"
+[Artem Butusov]: https://github.com/sormy "View Artem Butusov's GitHub profile"
+
 
 <!-- EOF -->
