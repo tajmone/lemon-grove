@@ -74,7 +74,7 @@ The "`lemon.exe`" command-line tool itself works great when given a valid input 
 
 ## Theory of Operation
 
-The main goal of Lemon is to translate a context free grammar (CFG) for a particular language into C code that implements a parser for that language. The program has two inputs:
+The main goal of Lemon is to translate a [context free grammar]  (CFG) for a particular language into C code that implements a parser for that language. The program has two inputs:
 
 - The grammar specification.
 - A parser template file.
@@ -87,7 +87,7 @@ Depending on command-line options, Lemon will generate up to three output files.
 - A header file defining an integer ID for each terminal symbol.
 - An information file that describes the states of the generated parser automaton.
 
-By default, all three of these output files are generated. The header file is suppressed if the "-m" command-line option is used and the report file is omitted when "-q" is selected.
+By default, all three of these output files are generated. The header file is suppressed if the "`-m`" command-line option is used and the report file is omitted when "`-q`" is selected.
 
 The grammar specification file uses a "`.y`" suffix, by convention. In the examples used in this document, we’ll assume the name of the grammar file is "`gram.y`". A typical use of Lemon would be the following command:
 
@@ -100,23 +100,25 @@ This command will generate three output files named "`gram.c`", "`gram.h`" and "
 
 The behavior of Lemon can be modified using command-line options. You can obtain a list of the available command-line options together with a brief explanation of what each does by typing
 
-    lemon "-?"
+    lemon -?
 
 As of this writing, the following command-line options are supported:
 
-- **-b** — Show only the basis for each parser state in the report file.
-- **-c** — Do not compress the generated action tables. The parser will be a little larger and slower, but it will detect syntax errors sooner.
-- **-d**_directory_ — Write all output files into *directory*. Normally, output files are written into the directory that contains the input grammar file.
-- **-D**_name_ — Define C preprocessor macro *name*. This macro is usable by `%ifdef` and `%ifndef` lines in the grammar file.
-- **-g** — Do not generate a parser. Instead write the input grammar to standard output with all comments, actions, and other extraneous text removed.
-- **-l** — Omit `#line` directives in the generated parser C code.
-- **-m** — Cause the output C source code to be compatible with the "makeheaders" program.
-- **-p** — Display all conflicts that are resolved by [precedence rules].
-- **-q** — Suppress generation of the report file.
-- **-r** — Do not sort or renumber the parser states as part of optimization.
-- **-s** — Show parser statistics before existing.
-- **-T**_file_ — Use *file* as the template for the generated C-code parser implementation.
-- **-x** — Print the Lemon version number.
+| command&#x2011;line&nbsp;option |                                                                 description                                                                 |
+|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| `-b`                            | Show only the basis for each parser state in the report file.                                                                               |
+| `-c`                            | Do not compress the generated action tables. The parser will be a little larger and slower, but it will detect syntax errors sooner.        |
+| `-d<directory>`                 | Write all output files into *directory*. Normally, output files are written into the directory that contains the input grammar file.        |
+| `-D<name>`                      | Define C preprocessor macro *name*. This macro is usable by `%ifdef` and `%ifndef` lines in the grammar file.                               |
+| `-g`                            | Do not generate a parser. Instead write the input grammar to standard output with all comments, actions, and other extraneous text removed. |
+| `-l`                            | Omit `#line` directives in the generated parser C code.                                                                                     |
+| `-m`                            | Cause the output C source code to be compatible with the "makeheaders" program.                                                             |
+| `-p`                            | Display all conflicts that are resolved by [precedence rules].                                                                              |
+| `-q`                            | Suppress generation of the report file.                                                                                                     |
+| `-r`                            | Do not sort or renumber the parser states as part of optimization.                                                                          |
+| `-s`                            | Show parser statistics before existing.                                                                                                     |
+| `-T<file>`                      | Use *file* as the template for the generated C-code parser implementation.                                                                  |
+| `-x`                            | Print the Lemon version number.                                                                                                             |
 
 ### The Parser Interface
 
@@ -370,32 +372,32 @@ Lemon supports the following special directives:
 
 <!-- convert entries into links: -->
 
-- `%code`
-- `%default_destructor`
-- `%default_type`
-- `%destructor`
-- `%endif`
-- `%extra_argument`
-- `%fallback`
-- `%ifdef`
-- `%ifndef`
-- `%include`
-- `%left`
-- `%name`
-- `%nonassoc`
-- `%parse_accept`
-- `%parse_failure`
-- `%right`
-- `%stack_overflow`
-- `%stack_size`
-- `%start_symbol`
-- `%syntax_error`
-- `%token_class`
-- `%token_destructor`
-- `%token_prefix`
-- `%token_type`
-- `%type`
-- `%wildcard`
+- [`%code`](#the-code-directive)
+- [`%default_destructor`](#the-default_destructor-directive)
+- [`%default_type`](#the-default_type-directive)
+- [`%destructor`](#the-destructor-directive)
+- [`%endif`](#the-ifdef-ifndef-and-endif-directives)
+- [`%extra_argument`](#the-extra_argument-directive)
+- [`%fallback`](#the-fallback-directive)
+- [`%ifdef`](#the-ifdef-ifndef-and-endif-directives)
+- [`%ifndef`](#the-ifdef-ifndef-and-endif-directives)
+- [`%include`](#the-include-directive)
+- [`%left`](#the-left-directive)
+- [`%name`](#the-name-directive)
+- [`%nonassoc`](#the-nonassoc-directive)
+- [`%parse_accept`](#the-parse_accept-directive)
+- [`%parse_failure`](#the-parse_failure-directive)
+- [`%right`](#the-right-directive)
+- [`%stack_overflow`](#the-stack_overflow-directive)
+- [`%stack_size`](#the-stack_size-directive)
+- [`%start_symbol`](#the-start_symbol-directive)
+- [`%syntax_error`](#the-syntax_error-directive)
+- [`%token_class`](#the-token_class-directive)
+- [`%token_destructor`](#the-token_destructor-directive)
+- [`%token_prefix`](#the-token_prefix-directive)
+- [`%token_type`](#the-token_type-and-type-directives)
+- [`%type`](#the-token_type-and-type-directives)
+- [`%wildcard`](#the-wildcard-directive)
 
 Each of these directives will be described separately in the following sections:
 
@@ -707,6 +709,8 @@ If the parser pops its stack until the stack is empty, and it still is unable to
 ------------------------------------------------------------------------------>
 
 [SQLite]: https://www.sqlite.org/ "Visit SQLite website"
+
+[context free grammar]: https://en.wikipedia.org/wiki/Context-free_grammar "See Wikipedia page on 'context-free grammar' (CFG)"
 
 <!-- Cross Reference Links -->
 
