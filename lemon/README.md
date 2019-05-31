@@ -17,6 +17,7 @@ The Lemon parser generator, created by [D. Richard Hipp], public domain.
 - [Lemon and SQLite](#lemon-and-sqlite)
 - [History of Lemon](#history-of-lemon)
 - [Files History and Sources](#files-history-and-sources)
+- [Changelog](#changelog)
 
 <!-- /MarkdownTOC -->
 
@@ -81,12 +82,22 @@ There is a clear difference in the coding styles of these two products, with SQL
 
 This folder contains the original, unmodified Lemon source files taken from the [SQLite] project on March 24th, 2019:
 
-- [`lemon.c`][lemon.c] — Taken from SQLite [`tool/lemon.c`][us lemon.c], commit [1caff0fb] (2019-01-15)
-- [`lempar.c`][lempar.c] — Taken from SQLite [`tool/lempar.c`][us lempar.c], commit [70fe8ec2] (2018-12-03)
+- [`lemon.c`][lemon.c] — Taken from SQLite [`tool/lemon.c`][us lemon.c], commit [ca068d82]  (2019-05-10)
+- [`lempar.c`][lempar.c] — Taken from SQLite [`tool/lempar.c`][us lempar.c], commit [70fe8ec2]  (2018-12-03)
 
 As well as the [official Lemon documentation], ported to markdown:
 
 - [`lemon.md`][lemon.md] — Converted from html to markdown by Tristano Ajmone.
+
+# Changelog
+
+In the following changelog, "upstream" refers to the [SQLite] project hosting the original Lemon sources.
+
+- **2019-05-31**
+    + `lemon.c` updated to upstream commit [ca068d82]  (2019-05-10)
+- **2019-04-24**
+    + `lemon.c` from upstream commit [1caff0fb]  (2019-01-15)
+    + `lempar.c` from upstream commit [70fe8ec2]  (2018-12-03)
 
 <!-----------------------------------------------------------------------------
                                REFERENCE LINKS
@@ -112,6 +123,7 @@ As well as the [official Lemon documentation], ported to markdown:
 
 [1caff0fb]: https://www.sqlite.org/src/info/1caff0fb0b2051e2 "View upstream commit"
 [70fe8ec2]: https://www.sqlite.org/src/info/70fe8ec2ae3099b8 "View upstream commit"
+[ca068d82]: https://www.sqlite.org/src/info/ca068d82387fc3cd "View upstream commit"
 
 [official Lemon documentation]: https://sqlite.org/src/doc/trunk/doc/lemon.html "View original HTML documentation"
 
