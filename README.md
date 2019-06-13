@@ -24,6 +24,8 @@ Project maintained by [Tristano Ajmone] since 2019/04/23.
         - [Lemon.JS](#lemonjs)
         - [Lemon PHP](#lemon-php)
         - [Lemon Rust](#lemon-rust)
+    - [Lemon Ports](#lemon-ports)
+        - [pomelo \(Rust\)](#pomelo-rust)
     - [Lemon Inspired](#lemon-inspired)
         - [limecc \(Python\)](#limecc-python)
     - [Editors Support for Lemon](#editors-support-for-lemon)
@@ -126,6 +128,18 @@ Created by [Wez Furlong] in 2006, last updated in 2012, BSD-like license.
 
 Created by [Rodrigo Rivas Costa] in 2015, actively maintained, released under Apache-2.0 license.
 
+## Lemon Ports
+
+Lemon reimplementations in other languages
+
+### pomelo (Rust)
+
+- https://github.com/rodrigorc/pomelo
+- https://crates.io/crates/pomelo
+
+By [Rodrigo Rivas Costa], released under dual license — MIT or Apache-2.0.
+
+Implementation of the Lemon parser generator as a Rust procedural macro.
 
 ## Lemon Inspired
 
