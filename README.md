@@ -126,7 +126,10 @@ Created by [Wez Furlong] in 2006, last updated in 2012, BSD-like license.
 
 - https://github.com/rodrigorc/lemon_rust
 
-Created by [Rodrigo Rivas Costa] in 2015, actively maintained, released under Apache-2.0 license.
+Created by [Rodrigo Rivas Costa] in 2015, released under Apache-2.0 license.
+
+Lemon Rust is now deprecated in favour of [pomelo], by same author.
+
 
 ## Lemon Ports
 
@@ -235,5 +238,8 @@ By [@dccmx], MIT License.
 [Martin Vejnár]: https://github.com/avakar "View Martin Vejnár's GitHub profile"
 [Artem Butusov]: https://github.com/sormy "View Artem Butusov's GitHub profile"
 
+<!-- xrefs -->
+
+[pomelo]: #pomelo-rust "Jump to pomelo review"
 
 <!-- EOF -->
