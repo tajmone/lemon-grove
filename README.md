@@ -16,7 +16,7 @@ Project maintained by [Tristano Ajmone] since 2019/04/23.
 
 - [About Lemon](#about-lemon)
 - [Project Contents](#project-contents)
-- [Useful Links](#useful-links)
+- [Lemon Links](#lemon-links)
     - [Official Lemon](#official-lemon)
     - [Cross-Language Lemons](#cross-language-lemons)
         - [Golemon \(Go\)](#golemon-go)
@@ -33,6 +33,8 @@ Project maintained by [Tristano Ajmone] since 2019/04/23.
         - [Emacs](#emacs)
         - [Sublime Text](#sublime-text)
         - [Vim](#vim)
+- [Good Reads](#good-reads)
+    - [Compiler Design in C](#compiler-design-in-c)
 
 <!-- /MarkdownTOC -->
 
@@ -73,7 +75,7 @@ There are many variations of the original Lemon code circulating over the Intern
 To avoid confusion, in this project all examples are kept together with the Lemon version for which they were designed. Different versions of Lemon (forks, ports, etc.) will be kept in separate folders, and each version will have its own `examples/` subfolder. The idea is to keep the Lemon Grove tidy and well structured, so that its users can easily distinguish which version of Lemon is where, and how to find examples for that specific version.
 
 
-# Useful Links
+# Lemon Links
 
 External links to useful third party Lemon-assets.
 
@@ -195,6 +197,22 @@ By [@dccmx], MIT License.
 
 > Crappy syntax highlighting in Vim for Lemon Parser Generator grammars.
 
+# Good Reads
+
+Links to useful books, articles and tutorials on the topics of lexing and parsing.
+
+## Compiler Design in C
+
+Free PDF book + sources, 984 pp.
+
+- https://holub.com/compiler/
+
+Originally published in 1990 by [Prentice-Hall Inc.], _Compiler Design in C_, by [Allen Holub], is an excellent book on the topic. Written in plain language, this book takes the reader through a 984 pages long journey on how to build a compiler, step by step, introducing and explaining each compiler component in detail, and providing source code examples of each implementation step.
+
+Since the book is now out of print, the author has generously made it available for free download on his website, in PDF format, including all the source code files and the release notes.
+
+[Prentice-Hall Inc.]: http://www.prenticehall.com/
+
 <!-----------------------------------------------------------------------------
                                REFERENCE LINKS
 ------------------------------------------------------------------------------>
@@ -230,13 +248,14 @@ By [@dccmx], MIT License.
 [@gwenn]: https://github.com/gwenn "View gwenn's GitHub profile"
 [@ksherlock]: https://github.com/ksherlock "View @ksherlock's GitHub profile"
 [@nsf]: https://github.com/nsf "View nsf's GitHub profile"
+[Allen Holub]: https://holub.com "Visit Allen Holub's website"
+[Artem Butusov]: https://github.com/sormy "View Artem Butusov's GitHub profile"
+[Martin Vejnár]: https://github.com/avakar "View Martin Vejnár's GitHub profile"
 [Masafumi Oyamada]: http://mooz.github.io/ "Visit Masafumi Oyamada's website"
 [Rodrigo Rivas Costa]: https://github.com/rodrigorc "View Rodrigo Rivas Costa's GitHub profile"
 [Tristano Ajmone]: https://github.com/tajmone "View Tristano Ajmone's GitHub profile"
 [Wez Furlong]: https://github.com/wez "View Wez Furlong's GitHub profile"
 [Yursen Kim]: https://github.com/kyursen "View Yursen Kim's GitHub profile"
-[Martin Vejnár]: https://github.com/avakar "View Martin Vejnár's GitHub profile"
-[Artem Butusov]: https://github.com/sormy "View Artem Butusov's GitHub profile"
 
 <!-- xrefs -->
 
