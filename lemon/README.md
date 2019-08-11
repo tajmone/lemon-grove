@@ -82,8 +82,8 @@ There is a clear difference in the coding styles of these two products, with SQL
 
 This folder contains the original, unmodified Lemon source files taken from the [SQLite] project on March 24th, 2019:
 
-- [`lemon.c`][lemon.c] — Taken from SQLite [`tool/lemon.c`][us lemon.c], commit [ca068d82]  (2019-05-10)
-- [`lempar.c`][lempar.c] — Taken from SQLite [`tool/lempar.c`][us lempar.c], commit [70fe8ec2]  (2018-12-03)
+- [`lemon.c`][lemon.c] — Taken from SQLite [`tool/lemon.c`][us lemon.c], check-in [2da0eea0]  (2019-06-03)
+- [`lempar.c`][lempar.c] — Taken from SQLite [`tool/lempar.c`][us lempar.c], check-in [9e664585]  (2019-07-16)
 
 As well as the [official Lemon documentation], ported to markdown:
 
@@ -93,11 +93,14 @@ As well as the [official Lemon documentation], ported to markdown:
 
 In the following changelog, "upstream" refers to the [SQLite] project hosting the original Lemon sources.
 
+- **2019-08-11**
+    + `lemon.c` updated to upstream check-in [2da0eea0]  (2019-06-03)
+    + `lempar.c` from upstream check-in [9e664585]  (2019-07-16)
 - **2019-05-31**
-    + `lemon.c` updated to upstream commit [ca068d82]  (2019-05-10)
+    + `lemon.c` updated to upstream check-in [ca068d82]  (2019-05-10)
 - **2019-04-24**
-    + `lemon.c` from upstream commit [1caff0fb]  (2019-01-15)
-    + `lempar.c` from upstream commit [70fe8ec2]  (2018-12-03)
+    + `lemon.c` from upstream check-in [1caff0fb]  (2019-01-15)
+    + `lempar.c` from upstream check-in [70fe8ec2]  (2018-12-03)
 
 <!-----------------------------------------------------------------------------
                                REFERENCE LINKS
@@ -116,14 +119,18 @@ In the following changelog, "upstream" refers to the [SQLite] project hosting th
 
 [examples]: ./examples/ "Navigate folder"
 
-<!-- upstream -->
+<!-- upstream sources & check-ins -->
 
 [us lemon.c]: https://www.sqlite.org/src/file/tool/lemon.c "View upstream source file"
-[us lempar.c]: https://www.sqlite.org/src/file/tool/lempar.c "View upstream source file"
+[ca068d82]: https://www.sqlite.org/src/info/ca068d82387fc3cd "View upstream check-in"
+[1caff0fb]: https://www.sqlite.org/src/info/1caff0fb0b2051e2 "View upstream check-in"
+[2da0eea0]: https://www.sqlite.org/src/info/2da0eea02d128c37 "View upstream check-in"
 
-[1caff0fb]: https://www.sqlite.org/src/info/1caff0fb0b2051e2 "View upstream commit"
-[70fe8ec2]: https://www.sqlite.org/src/info/70fe8ec2ae3099b8 "View upstream commit"
-[ca068d82]: https://www.sqlite.org/src/info/ca068d82387fc3cd "View upstream commit"
+
+[us lempar.c]: https://www.sqlite.org/src/file/tool/lempar.c "View upstream source file"
+[70fe8ec2]: https://www.sqlite.org/src/info/70fe8ec2ae3099b8 "View upstream check-in"
+[9e664585]: https://www.sqlite.org/src/info/9e66458592d40fbd "View upstream check-in"
+
 
 [official Lemon documentation]: https://sqlite.org/src/doc/trunk/doc/lemon.html "View original HTML documentation"
 
