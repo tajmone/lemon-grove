@@ -3,6 +3,7 @@
 The Lemon parser generator, created by [D. Richard Hipp], public domain.
 
 - [`/examples/`][examples] — user contributed examples.
+- [`/sliced/`][sliced] — [de-amalgamated] Lemon (split sources) to easen code study and porting.
 - [`lemon.c`][lemon.c] — the parser generator program.
 - [`lempar.c`][lempar.c] — the template for the parser generator.
 - [`lemon.md`][lemon.md] — Lemon documentation.
@@ -106,6 +107,7 @@ In the following changelog, "upstream" refers to the [SQLite] project hosting th
                                REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
+[de-amalgamated]: https://www.sqlite.org/amalgamation.html "Learn about amalgamation in the SQLite project"
 [LALR(1)]: https://en.wikipedia.org/wiki/LALR_parser "See Wikipedia page on LALR parser"
 [parser generator]: https://en.wikipedia.org/wiki/Compiler-compiler "See Wikipedia page on Compiler-compiler"
 
@@ -118,6 +120,7 @@ In the following changelog, "upstream" refers to the [SQLite] project hosting th
 <!-- project folders -->
 
 [examples]: ./examples/ "Navigate folder"
+[sliced]: ./sliced/ "Navigate folder"
 
 <!-- upstream sources & check-ins -->
 

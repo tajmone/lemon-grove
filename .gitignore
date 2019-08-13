@@ -3,6 +3,37 @@
 # https://github.com/tajmone/lemon-grove
 ################################################################################
 
+## ============
+## Binary files
+## ============
+
+## Object files
+###############
+*.elf
+*.ko
+*.o
+*.obj
+
+## Static libraries
+###################
+*.a
+*.la
+*.lib
+*.lo
+
+## Shared objects
+#################
+*.dll
+*.dylib
+*.so
+*.so.*
+
+## Executables
+##############
+*.app
+*.exe
+*.out
+
 ## ===============
 ## Temp Work Files
 ## ===============

@@ -33,6 +33,8 @@ Project maintained by [Tristano Ajmone] since 2019/04/23.
         - [Emacs](#emacs)
         - [Sublime Text](#sublime-text)
         - [Vim](#vim)
+    - [Lemon Tools](#lemon-tools)
+        - [Lemon Slicer](#lemon-slicer)
 - [Good Reads](#good-reads)
     - [Compiler Design in C](#compiler-design-in-c)
 
@@ -64,6 +66,7 @@ Currently, this repository contains only the official version of Lemon (public d
 
 - [`/lemon/`](./lemon/) — original Lemon sources from [SQLite]:
     + [`/examples/`](./lemon/examples) — user-contributed examples.
+    + [`/sliced/`](./lemon/sliced) — [de-amalgamated] Lemon (split sources).
     + [`lemon.c`](./lemon/lemon.c) — parser generator program.
     + [`lempar.c`](./lemon/lempar.c) — template for the parser generator.
     + [`lemon.md`](./lemon/lemon.md) — documentation.
@@ -72,8 +75,14 @@ The `examples/` subfolder contains third-party examples based on this version of
 
 There are many variations of the original Lemon code circulating over the Internet, and it's quite common to find tutorials and examples that rely on tweaked versions of Lemon, often in conjunction with other tools (like [re2c]).
 
-To avoid confusion, in this project all examples are kept together with the Lemon version for which they were designed. Different versions of Lemon (forks, ports, etc.) will be kept in separate folders, and each version will have its own `examples/` subfolder. The idea is to keep the Lemon Grove tidy and well structured, so that its users can easily distinguish which version of Lemon is where, and how to find examples for that specific version.
+To avoid confusion, in this project all examples are kept together with the Lemon version for which they were designed. Different versions of Lemon (forks, ports, etc.) will be kept in separate folders, and each version will have its own `examples/` subfolder.
+The idea is to keep the Lemon Grove tidy and well structured, so that its users can easily distinguish which version of Lemon is where, and how to find examples for that specific version.
 
+The [`sliced/` subfolder][slcd] contains a [de-amalgamated] version of Lemon, i.e. the single `lemon.c` source file is split into separate modules (23 files), like it used to be originally.
+Anyone interested in studying or porting the Lemon source code will find it easier to work on these individual modules, instead of the official single-file source (&gt;5600 lines).
+
+Since de-amalgamation is done via a custom tool ([Lemon Slicer]) and derived from the code found in the `lemon/` folder, the Lemon sources in the `sliced/` folder will always mirror the code from the `lemon/` folder.
+Whenever the latter is updated, the former gets updated too.
 
 # Lemon Links
 
@@ -197,6 +206,19 @@ By [@dccmx], MIT License.
 
 > Crappy syntax highlighting in Vim for Lemon Parser Generator grammars.
 
+## Lemon Tools
+
+Links to some Lemon-related tools.
+
+### Lemon Slicer
+
+- https://github.com/tajmone/lemon-slicer
+
+Lemon Slicer is a dedicated tool to de-amalgamate the "`lemon.c`" source file into separate modules.
+It was created specifically for the Lemon Grove project.
+
+By [Tristano Ajmone], MIT License.
+
 # Good Reads
 
 Links to useful books, articles and tutorials on the topics of lexing and parsing.
@@ -217,9 +239,22 @@ Since the book is now out of print, the author has generously made it available 
                                REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
+[de-amalgamated]: https://www.sqlite.org/amalgamation.html "Learn about amalgamation in the SQLite project"
+
+<!-- repo links -->
+
 [open an issue]: https://github.com/tajmone/lemon-grove/issues/new "Click to open a new issue..."
 [:badge-travis:]: https://travis-ci.com/tajmone/lemon-grove.svg?branch=master
 [:project-travis:]: https://travis-ci.com/tajmone/lemon-grove
+
+<!-- xrefs -->
+
+[pomelo]: #pomelo-rust "Jump to pomelo review"
+[Lemon Slicer]: #lemon-slicer "Jump to Lemon Slicer review"
+
+<!-- project files & folders -->
+
+[slcd]: ./lemon/sliced/ "Go to the de-amalgamated Lemon source code"
 
 <!-- external references -->
 
@@ -256,9 +291,5 @@ Since the book is now out of print, the author has generously made it available 
 [Tristano Ajmone]: https://github.com/tajmone "View Tristano Ajmone's GitHub profile"
 [Wez Furlong]: https://github.com/wez "View Wez Furlong's GitHub profile"
 [Yursen Kim]: https://github.com/kyursen "View Yursen Kim's GitHub profile"
-
-<!-- xrefs -->
-
-[pomelo]: #pomelo-rust "Jump to pomelo review"
 
 <!-- EOF -->
