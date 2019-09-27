@@ -202,7 +202,7 @@ By [@ksherlock], CC0 1.0 Universal.
 
 - https://github.com/sergeyklay/lemon-vscode
 
-By [@sergeyklay], MIT License.
+By [Serghei Iakovlev], MIT License.
 
 > Lemon Parser Generator syntax highlighting for VSCode.
 
@@ -292,11 +292,13 @@ Since the book is now out of print, the author has generously made it available 
 [@gwenn]: https://github.com/gwenn "View gwenn's GitHub profile"
 [@ksherlock]: https://github.com/ksherlock "View @ksherlock's GitHub profile"
 [@nsf]: https://github.com/nsf "View nsf's GitHub profile"
+[@sergeyklay]: https://github.com/sergeyklay "View Serghei Iakovlev's GitHub profile"
 [Allen Holub]: https://holub.com "Visit Allen Holub's website"
 [Artem Butusov]: https://github.com/sormy "View Artem Butusov's GitHub profile"
 [Martin Vejnár]: https://github.com/avakar "View Martin Vejnár's GitHub profile"
 [Masafumi Oyamada]: http://mooz.github.io/ "Visit Masafumi Oyamada's website"
 [Rodrigo Rivas Costa]: https://github.com/rodrigorc "View Rodrigo Rivas Costa's GitHub profile"
+[Serghei Iakovlev]: https://github.com/sergeyklay "View Serghei Iakovlev's GitHub profile"
 [Tristano Ajmone]: https://github.com/tajmone "View Tristano Ajmone's GitHub profile"
 [Wez Furlong]: https://github.com/wez "View Wez Furlong's GitHub profile"
 [Yursen Kim]: https://github.com/kyursen "View Yursen Kim's GitHub profile"
