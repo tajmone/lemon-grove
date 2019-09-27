@@ -32,6 +32,7 @@ Project maintained by [Tristano Ajmone] since 2019/04/23.
         - [Atom](#atom)
         - [Emacs](#emacs)
         - [Sublime Text](#sublime-text)
+        - [VSCode](#vscode)
         - [Vim](#vim)
     - [Lemon Tools](#lemon-tools)
         - [Lemon Slicer](#lemon-slicer)
@@ -196,6 +197,14 @@ By [Masafumi Oyamada], GNU GPL v3.
 By [@ksherlock], CC0 1.0 Universal.
 
 > Sublime Text 3 syntax file for the Lemon parser generator.
+
+### VSCode
+
+- https://github.com/sergeyklay/lemon-vscode
+
+By [@sergeyklay], MIT License.
+
+> Lemon Parser Generator syntax highlighting for VSCode.
 
 ### Vim
 
