@@ -21,6 +21,7 @@ Project maintained by [Tristano Ajmone] since 2019/04/23.
     - [Lemon Forks](#lemon-forks)
         - [Lemonex](#lemonex)
     - [Cross-Language Lemons](#cross-language-lemons)
+        - [Citron \(Swift\)](#citron-swift)
         - [Golemon \(Go\)](#golemon-go)
         - [jlemon \(Java\)](#jlemon-java)
         - [Lemon.JS](#lemonjs)
@@ -120,6 +121,15 @@ Lemonex is an extension to the lemon parser, developed to include a built.in lex
 
 Lemon has been adapted to produce parser generators in other programming languages too, by tweaking its C source code and creating an _ad hoc_ version of `lempar.c` in the target language.
 
+### Citron (Swift)
+
+- https://github.com/roop/citron
+- https://roopc.net/citron/
+
+By [Roopesh Chander] in 2017, MIT licensed.
+
+Citron is an LALR parser generator for Swift, based on the Lemon engine.
+
 ### Golemon (Go)
 
 - https://github.com/nsf/golemon
@@ -172,7 +182,7 @@ Implementation of the Lemon parser generator as a Rust procedural macro.
 
 ## Lemon Inspired
 
-Lemon has played an influencial role in the development of parser generators, serving as a model for the creation of similar tools. Here are links to some of them.
+Lemon has played an influential role in the development of parser generators, serving as a model for the creation of similar tools. Here are links to some of them.
 
 ### limecc (Python)
 
@@ -313,9 +323,11 @@ Since the book is now out of print, the author has generously made it available 
 [Martin Vejnár]: https://github.com/avakar "View Martin Vejnár's GitHub profile"
 [Masafumi Oyamada]: http://mooz.github.io/ "Visit Masafumi Oyamada's website"
 [Rodrigo Rivas Costa]: https://github.com/rodrigorc "View Rodrigo Rivas Costa's GitHub profile"
+[Roopesh Chander]: https://github.com/roop "View Roopesh Chander's GitHub profile"
 [Serghei Iakovlev]: https://github.com/sergeyklay "View Serghei Iakovlev's GitHub profile"
 [Tristano Ajmone]: https://github.com/tajmone "View Tristano Ajmone's GitHub profile"
 [Wez Furlong]: https://github.com/wez "View Wez Furlong's GitHub profile"
 [Yursen Kim]: https://github.com/kyursen "View Yursen Kim's GitHub profile"
+
 
 <!-- EOF -->
