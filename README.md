@@ -18,6 +18,8 @@ Project maintained by [Tristano Ajmone] since 2019/04/23.
 - [Project Contents](#project-contents)
 - [Lemon Links](#lemon-links)
     - [Official Lemon](#official-lemon)
+    - [Lemon Forks](#lemon-forks)
+        - [Lemonex](#lemonex)
     - [Cross-Language Lemons](#cross-language-lemons)
         - [Golemon \(Go\)](#golemon-go)
         - [jlemon \(Java\)](#jlemon-java)
@@ -101,6 +103,18 @@ The official Lemon code, actively maintained as part of the [SQLite] project.
     + [`lemon.c`](https://www.sqlite.org/src/file/tool/lemon.c)
     + [`lempar.c`](https://www.sqlite.org/src/file/tool/lempar.c)
     + [`lemon.html`](https://sqlite.org/src/doc/trunk/doc/lemon.html)
+
+## Lemon Forks
+
+Adaptations of Lemon that add new functionality or provide native integration with other tools.
+
+### Lemonex
+
+- https://github.com/renjipanicker/lemonex
+
+Created by [@renjipanicker] in 2015, public domain.
+
+Lemonex is an extension to the lemon parser, developed to include a built.in lexer.
 
 ## Cross-Language Lemons
 
@@ -292,6 +306,7 @@ Since the book is now out of print, the author has generously made it available 
 [@gwenn]: https://github.com/gwenn "View gwenn's GitHub profile"
 [@ksherlock]: https://github.com/ksherlock "View @ksherlock's GitHub profile"
 [@nsf]: https://github.com/nsf "View nsf's GitHub profile"
+[@renjipanicker]: https://github.com/renjipanicker "View @renjipanicker's GitHub profile"
 [@sergeyklay]: https://github.com/sergeyklay "View Serghei Iakovlev's GitHub profile"
 [Allen Holub]: https://holub.com "Visit Allen Holub's website"
 [Artem Butusov]: https://github.com/sormy "View Artem Butusov's GitHub profile"
