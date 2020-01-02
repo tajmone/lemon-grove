@@ -1,13 +1,15 @@
+############################################
+#  Lemon Grove                             #
+#  https://github.com/tajmone/lemon-grove  #
+############################################
+
 dist: trusty
 
 language: c
+compiler: gcc
 
 git:
-  depth: 1
-
-compiler:
-  - gcc
-  - clang
+  depth: false
 
 cache:
   apt: true
@@ -16,14 +18,31 @@ cache:
 before_script:
   - $CC --version
 
-script:
-  - |
-    set -e
+install:
+  - npm install -g eclint
 
-    for d in $(find $TRAVIS_BUILD_DIR/lemon/examples/* -type d) ; do
-        cd $d
-        make CC=$CC
-        make test
-        make clean
-        cd $TRAVIS_BUILD_DIR
-    done
+jobs:
+    include:
+    # ==============================================
+    # EditorConfig Code Styles Validation via EClint
+    # ==============================================
+    # https://editorconfig.org
+    # https://www.npmjs.com/package/eclint
+    - name: "EditorConfig Validation"
+      script:
+        - bash ./validate.sh
+    # =================================
+    # Validate all Contributed Examples
+    # =================================
+    - name: "Build Examples"
+      script:
+        - |
+          set -e
+
+          for d in $(find $TRAVIS_BUILD_DIR/lemon/examples/* -type d) ; do
+              cd $d
+              make CC=$CC
+              make test
+              make clean
+              cd $TRAVIS_BUILD_DIR
+          done

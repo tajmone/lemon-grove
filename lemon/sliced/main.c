@@ -35,7 +35,7 @@ static void handle_D_option(char *z){
   *z = 0;
 }
 
-/* Rember the name of the output directory 
+/* Rember the name of the output directory
 */
 static char *outputDir = NULL;
 static void handle_d_option(char *z){
@@ -128,7 +128,7 @@ int main(int argc, char **argv)
   static int mhflag = 0;
   static int nolinenosflag = 0;
   static int noResort = 0;
-  
+
   static struct s_options options[] = {
     {OPT_FLAG, "b", (char*)&basisflag, "Print only the basis in report."},
     {OPT_FLAG, "c", (char*)&compress, "Don't compress the action table."},

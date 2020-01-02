@@ -1,7 +1,7 @@
-################################################################################
-# Lemon Grove
-# https://github.com/tajmone/lemon-grove
-################################################################################
+############################################
+#  Lemon Grove                             #
+#  https://github.com/tajmone/lemon-grove  #
+############################################
 
 ## ============
 ## Binary files
@@ -53,7 +53,7 @@ README.html
 
 *~
 
-# temporary files which can be created if a process still has a handle open of a deleted 
+# temporary files which can be created if a process still has a handle open of a deleted
 file
 .fuse_hidden*
 

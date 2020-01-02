@@ -46,7 +46,7 @@ Again, this is a generated file, so if any additions are made to this file, they
 
 
 <!-----------------------------------------------------------------------------
-                               REFERENCE LINKS                                
+                               REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
 [Serghei Iakovlev]: https://github.com/sergeyklay "View Serghei Iakovlev's GitHub profile"

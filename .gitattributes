@@ -1,31 +1,38 @@
-################################################################################
-# Lemon Grove
-# https://github.com/tajmone/lemon-grove
-################################################################################
+############################################
+#  Lemon Grove                             #
+#  https://github.com/tajmone/lemon-grove  #
+############################################
 
 * text=auto
 
-## ============
 ## Source Files
-## ============
+################
 *.c   text
 *.h   text
 *.y   text
 
-## =============
-## Shell scripts
-## =============
-*.bat      text eol=crlf
-*.com      text eol=crlf
-*.sh       text eol=lf
-*.ps1      text eol=crlf
+## Make files
+#############
+[Mm]akefile     text eol=lf
+[Mm]akefile*    text eol=lf
+[Mm]akefile.*   text eol=lf
 
-## ===================
-## Documentation files
-## ===================
+## Shell Scripts
+################
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+*.sh    text eol=lf
+*.ps1   text eol=crlf
+
+## Documentation Files
+######################
 *.adoc         text
 *.asciidoc     text
+*.docx         binary
+*.markdown     text
 *.md           text
+*.odt          binary
+*.pdf          binary
 *.txt          text
 *COPYRIGHT*    text
 *README*       text
@@ -41,28 +48,18 @@ LICENSE        text
 NEWS           text
 readme         text
 
-## ===================
-## Configuration files
-## ===================
-*.yaml         text
-*.cnf          text
-*.conf         text
-*.config       text
-*.ini          text
-*.prefs        text
-.editorconfig  text
-Makefile       text
-## -------------
-## Git settings:
-## -------------
-.gitattributes text
-.gitconfig     text
-.gitignore     text
-.gitmodules    text
+## Repository Configuration
+###########################
+.editorconfig    text eol=lf
+.gitlab-ci.yml   text eol=lf
+.travis.yml      text eol=lf
+.gitattributes   text eol=lf
+.gitconfig       text eol=lf
+.gitignore       text eol=lf
+.gitmodules      text eol=lf
 
-## ======================
-## IMAGE & GRAPHICS FILES
-## ======================
+## Image & Graphics Files
+#########################
 *.bmp        binary
 *.gif        binary
 *.ico        binary

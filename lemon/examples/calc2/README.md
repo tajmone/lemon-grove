@@ -19,9 +19,9 @@ This version of our calculator is more interesting example. The main difference 
 
 ``` c
 typedef struct Token {
-	const char *op;
-	int value;
-	unsigned n;
+    const char *op;
+    int value;
+    unsigned n;
 } Token;
 ```
 
@@ -29,8 +29,8 @@ Defining a structure for the token type is the most common practice to provide f
 
 ``` c
 expr(A) ::= expr(B) MINUS expr(C). {
-	A.value = B.value - C.value;
-	A.n = B.n+1 + C.n+1;
+    A.value = B.value - C.value;
+    A.n = B.n+1 + C.n+1;
 }
 ```
 
