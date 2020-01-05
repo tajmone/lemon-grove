@@ -1105,9 +1105,10 @@ static void writeRuleText(FILE *out, struct rule *rp){
 /* Generate C source code for the parser */
 void ReportTable(
   struct lemon *lemp,
-  int mhflag     /* Output in makeheaders format if true */
+  int mhflag,     /* Output in makeheaders format if true */
+  int sqlFlag     /* Generate the *.sql file too */
 ){
-  FILE *out, *in;
+  FILE *out, *in, *sql;
   char line[LINESIZE];
   int  lineno;
   struct state *stp;
@@ -1115,6 +1116,7 @@ void ReportTable(
   struct rule *rp;
   struct acttab *pActtab;
   int i, j, n, sz;
+  int nLookAhead;
   int szActionType;     /* sizeof(YYACTIONTYPE) */
   int szCodeType;       /* sizeof(YYCODETYPE)   */
   const char *name;
@@ -1135,6 +1137,78 @@ void ReportTable(
   if( out==0 ){
     fclose(in);
     return;
+  }
+  if( sqlFlag==0 ){
+    sql = 0;
+  }else{
+    sql = file_open(lemp, ".sql", "wb");
+    if( sql==0 ){
+      fclose(in);
+      fclose(out);
+      return;
+    }
+    fprintf(sql,
+       "BEGIN;\n"
+       "CREATE TABLE symbol(\n"
+       "  id INTEGER PRIMARY KEY,\n"
+       "  name TEXT NOT NULL,\n"
+       "  isTerminal BOOLEAN NOT NULL,\n"
+       "  fallback INTEGER REFERENCES symbol"
+               " DEFERRABLE INITIALLY DEFERRED\n"
+       ");\n"
+    );
+    for(i=0; i<lemp->nsymbol; i++){
+      fprintf(sql,
+         "INSERT INTO symbol(id,name,isTerminal,fallback)"
+         "VALUES(%d,'%s',%s",
+         i, lemp->symbols[i]->name,
+         i<lemp->nterminal ? "TRUE" : "FALSE"
+      );
+      if( lemp->symbols[i]->fallback ){
+        fprintf(sql, ",%d);\n", lemp->symbols[i]->fallback->index);
+      }else{
+        fprintf(sql, ",NULL);\n");
+      }
+    }
+    fprintf(sql,
+      "CREATE TABLE rule(\n"
+      "  ruleid INTEGER PRIMARY KEY,\n"
+      "  lhs INTEGER REFERENCES symbol(id),\n"
+      "  txt TEXT\n"
+      ");\n"
+      "CREATE TABLE rulerhs(\n"
+      "  ruleid INTEGER REFERENCES rule(ruleid),\n"
+      "  pos INTEGER,\n"
+      "  sym INTEGER REFERENCES symbol(id)\n"
+      ");\n"
+    );
+    for(i=0, rp=lemp->rule; rp; rp=rp->next, i++){
+      assert( i==rp->iRule );
+      fprintf(sql,
+        "INSERT INTO rule(ruleid,lhs,txt)VALUES(%d,%d,'",
+        rp->iRule, rp->lhs->index
+      );
+      writeRuleText(sql, rp);
+      fprintf(sql,"');\n");
+      for(j=0; j<rp->nrhs; j++){
+        struct symbol *sp = rp->rhs[j];
+        if( sp->type!=MULTITERMINAL ){
+          fprintf(sql,
+            "INSERT INTO rulerhs(ruleid,pos,sym)VALUES(%d,%d,%d);\n",
+            i,j,sp->index
+          );
+        }else{
+          int k;
+          for(k=0; k<sp->nsubsym; k++){
+            fprintf(sql,
+              "INSERT INTO rulerhs(ruleid,pos,sym)VALUES(%d,%d,%d);\n",
+              i,j,sp->subsym[k]->index
+            );
+          }
+        }
+      }
+    }
+    fprintf(sql, "COMMIT;\n");
   }
   lineno = 1;
   tplt_xfer(lemp->name,in,out,&lineno);
@@ -1311,6 +1385,8 @@ void ReportTable(
   ** been computed */
   fprintf(out,"#define YYNSTATE             %d\n",lemp->nxstate);  lineno++;
   fprintf(out,"#define YYNRULE              %d\n",lemp->nrule);  lineno++;
+  fprintf(out,"#define YYNRULE_WITH_ACTION  %d\n",lemp->nruleWithAction);
+         lineno++;
   fprintf(out,"#define YYNTOKEN             %d\n",lemp->nterminal); lineno++;
   fprintf(out,"#define YY_MAX_SHIFT         %d\n",lemp->nxstate-1); lineno++;
   i = lemp->minShiftReduce;
@@ -1365,13 +1441,29 @@ void ReportTable(
     if( la<0 ) la = lemp->nsymbol;
     if( j==0 ) fprintf(out," /* %5d */ ", i);
     fprintf(out, " %4d,", la);
-    if( j==9 || i==n-1 ){
+    if( j==9 ){
       fprintf(out, "\n"); lineno++;
       j = 0;
     }else{
       j++;
     }
   }
+  /* Add extra entries to the end of the yy_lookahead[] table so that
+  ** yy_shift_ofst[]+iToken will always be a valid index into the array,
+  ** even for the largest possible value of yy_shift_ofst[] and iToken. */
+  nLookAhead = lemp->nterminal + lemp->nactiontab;
+  while( i<nLookAhead ){
+    if( j==0 ) fprintf(out," /* %5d */ ", i);
+    fprintf(out, " %4d,", lemp->nterminal);
+    if( j==9 ){
+      fprintf(out, "\n"); lineno++;
+      j = 0;
+    }else{
+      j++;
+    }
+    i++;
+  }
+  if( j>0 ){ fprintf(out, "\n"); lineno++; }
   fprintf(out, "};\n"); lineno++;
 
   /* Output the yy_shift_ofst[] table */
@@ -1451,7 +1543,9 @@ void ReportTable(
   */
   if( lemp->has_fallback ){
     int mx = lemp->nterminal - 1;
-    while( mx>0 && lemp->symbols[mx]->fallback==0 ){ mx--; }
+    /* 2019-08-28:  Generate fallback entries for every token to avoid
+    ** having to do a range check on the index */
+    /* while( mx>0 && lemp->symbols[mx]->fallback==0 ){ mx--; } */
     lemp->tablesize += (mx+1)*szCodeType;
     for(i=0; i<=mx; i++){
       struct symbol *p = lemp->symbols[i];
@@ -1612,7 +1706,10 @@ void ReportTable(
     assert( rp->noCode );
     fprintf(out,"      /* (%d) ", rp->iRule);
     writeRuleText(out, rp);
-    if( rp->doesReduce ){
+    if( rp->neverReduce ){
+      fprintf(out, " (NEVER REDUCES) */ assert(yyruleno!=%d);\n",
+              rp->iRule); lineno++;
+    }else if( rp->doesReduce ){
       fprintf(out, " */ yytestcase(yyruleno==%d);\n", rp->iRule); lineno++;
     }else{
       fprintf(out, " (OPTIMIZED OUT) */ assert(yyruleno!=%d);\n",
@@ -1640,6 +1737,7 @@ void ReportTable(
   acttab_free(pActtab);
   fclose(in);
   fclose(out);
+  if( sql ) fclose(sql);
   return;
 }
 

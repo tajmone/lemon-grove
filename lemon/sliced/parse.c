@@ -80,14 +80,16 @@ static void parseonetoken(struct pstate *psp)
       }else if( x[0]=='{' ){
         if( psp->prevrule==0 ){
           ErrorMsg(psp->filename,psp->tokenlineno,
-"There is no prior rule upon which to attach the code \
-fragment which begins on this line.");
+            "There is no prior rule upon which to attach the code "
+            "fragment which begins on this line.");
           psp->errorcnt++;
         }else if( psp->prevrule->code!=0 ){
           ErrorMsg(psp->filename,psp->tokenlineno,
-"Code fragment beginning on this line is not the first \
-to follow the previous rule.");
+            "Code fragment beginning on this line is not the first "
+            "to follow the previous rule.");
           psp->errorcnt++;
+        }else if( strcmp(x, "{NEVER-REDUCE")==0 ){
+          psp->prevrule->neverReduce = 1;
         }else{
           psp->prevrule->line = psp->tokenlineno;
           psp->prevrule->code = &x[1];
@@ -113,8 +115,8 @@ to follow the previous rule.");
         psp->errorcnt++;
       }else if( psp->prevrule->precsym!=0 ){
         ErrorMsg(psp->filename,psp->tokenlineno,
-"Precedence mark on this line is not the first \
-to follow the previous rule.");
+          "Precedence mark on this line is not the first "
+          "to follow the previous rule.");
         psp->errorcnt++;
       }else{
         psp->prevrule->precsym = Symbol_new(x);
@@ -717,7 +719,8 @@ void Parse(struct lemon *gp)
       }
       if( c==0 ){
         ErrorMsg(ps.filename,startline,
-"String starting on this line is not terminated before the end of the file.");
+            "String starting on this line is not terminated before "
+            "the end of the file.");
         ps.errorcnt++;
         nextcp = cp;
       }else{
@@ -756,7 +759,8 @@ void Parse(struct lemon *gp)
       }
       if( c==0 ){
         ErrorMsg(ps.filename,ps.tokenlineno,
-"C code starting on this line is not terminated before the end of the file.");
+          "C code starting on this line is not terminated before "
+          "the end of the file.");
         ps.errorcnt++;
         nextcp = cp;
       }else{

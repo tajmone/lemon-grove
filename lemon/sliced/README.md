@@ -5,8 +5,8 @@ The "`lempar.c`" file is left untouched (it's not an amalgamated source), and yo
 
 The [de-amalgamated] source files in this folder were derived from:
 
-- SQLite [`tool/lemon.c`][us lemon.c], check-in [2da0eea0]  (2019-06-03)
-- SQLite [`tool/lempar.c`][us lempar.c], check-in [9e664585]  (2019-07-16)
+- SQLite [`tool/lemon.c`][us lemon.c], check-in [`fccfb8a9`][fccfb8a9]  (2019-12-19)
+- SQLite [`tool/lempar.c`][us lempar.c], check-in [`4d6d2fc0`][4d6d2fc0]  (2019-12-11)
 
 
 -----
@@ -80,9 +80,12 @@ Of course, you can use Lemon Slicer to de-amalgamate any version of Lemon outsid
 The following changelog lists which versions of the Lemon sources were used to create the de-amalgamated files found in this folder — where "upstream" refers to the [SQLite] project hosting the original Lemon sources.
 
 
+- **2020-01-05**
+    + `lemon.c` sliced from upstream check-in [`fccfb8a9`][fccfb8a9]  (2019-12-19)
+    + `lempar.c` sliced from upstream check-in [`4d6d2fc0`][4d6d2fc0]  (2019-12-11)
 - **2019-08-13**
-    + `lemon.c` from upstream check-in [2da0eea0]  (2019-06-03)
-    + `lempar.c` from upstream check-in [9e664585]  (2019-07-16)
+    + `lemon.c` sliced from upstream check-in [`2da0eea0`][2da0eea0]  (2019-06-03)
+    + `lempar.c` sliced from upstream check-in [`9e664585`][9e664585]  (2019-07-16)
 
 <!-----------------------------------------------------------------------------
                                REFERENCE LINKS
@@ -101,10 +104,18 @@ The following changelog lists which versions of the Lemon sources were used to c
 <!-- upstream sources & check-ins -->
 
 [us lemon.c]: https://www.sqlite.org/src/file/tool/lemon.c "View upstream source file"
+[fccfb8a9]: https://www.sqlite.org/src/info/fccfb8a9ed3c1df9 "View upstream check-in"
+[2da0eea0]: https://www.sqlite.org/src/info/2da0eea02d128c37 "View upstream check-in"
+
+[4d6d2fc0]: https://www.sqlite.org/src/info/4d6d2fc046d586a1 "View upstream check-in"
 [2da0eea0]: https://www.sqlite.org/src/info/2da0eea02d128c37 "View upstream check-in"
 
 
 [us lempar.c]: https://www.sqlite.org/src/file/tool/lempar.c "View upstream source file"
+[fccfb8a9]: https://www.sqlite.org/src/info/fccfb8a9ed3c1df9 "View upstream check-in"
+[2da0eea0]: https://www.sqlite.org/src/info/2da0eea02d128c37 "View upstream check-in"
+
+[4d6d2fc0]: https://www.sqlite.org/src/info/4d6d2fc046d586a1 "View upstream check-in"
 [9e664585]: https://www.sqlite.org/src/info/9e66458592d40fbd "View upstream check-in"
 
 <!-- EOF -->

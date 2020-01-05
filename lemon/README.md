@@ -81,27 +81,32 @@ There is a clear difference in the coding styles of these two products, with SQL
 
 # Files History and Sources
 
-This folder contains the original, unmodified Lemon source files taken from the [SQLite] project on March 24th, 2019:
+This folder contains the original Lemon source files taken from the [SQLite] project on January 5, 2020:
 
-- [`lemon.c`][lemon.c] — Taken from SQLite [`tool/lemon.c`][us lemon.c], check-in [2da0eea0]  (2019-06-03)
-- [`lempar.c`][lempar.c] — Taken from SQLite [`tool/lempar.c`][us lempar.c], check-in [9e664585]  (2019-07-16)
+- [`lemon.c`][lemon.c] — Taken from SQLite [`tool/lemon.c`][us lemon.c], check-in [`fccfb8a9`][fccfb8a9]  (2019-12-19)
+- [`lempar.c`][lempar.c] — Taken from SQLite [`tool/lempar.c`][us lempar.c], check-in [`4d6d2fc0`][4d6d2fc0]  (2019-12-11)
 
-As well as the [official Lemon documentation], ported to markdown:
+And the [official Lemon documentation], ported to markdown by Tristano Ajmone:
 
-- [`lemon.md`][lemon.md] — Converted from html to markdown by Tristano Ajmone.
+- [`lemon.md`][lemon.md] — Ported from SQLite [`doc/lemon.html`][us lemon.html], check-in [`9c9c46dc`][9c9c46dc]  (2018-11-27).
+
+> **NOTE** — The C sources are unaltered, except for minor whitespace modifications to pass our [EditorConfig] code-styles validation on Travis CI — i.e., stripping trailing whitespace, and other minor aesthetic tweaks that don't involve actual changes to the code.
 
 # Changelog
 
 In the following changelog, "upstream" refers to the [SQLite] project hosting the original Lemon sources.
 
+- **2020-01-05**
+    + `lemon.c` updated to upstream check-in [`fccfb8a9`][fccfb8a9]  (2019-12-19)
+    + `lempar.c` updated to upstream check-in [`4d6d2fc0`][4d6d2fc0]  (2019-12-11)
 - **2019-08-11**
-    + `lemon.c` updated to upstream check-in [2da0eea0]  (2019-06-03)
-    + `lempar.c` from upstream check-in [9e664585]  (2019-07-16)
+    + `lemon.c` updated to upstream check-in [`2da0eea0`][2da0eea0]  (2019-06-03)
+    + `lempar.c` updated to upstream check-in [`9e664585`][9e664585]  (2019-07-16)
 - **2019-05-31**
-    + `lemon.c` updated to upstream check-in [ca068d82]  (2019-05-10)
+    + `lemon.c` updated to upstream check-in [`ca068d82`][ca068d82]  (2019-05-10)
 - **2019-04-24**
-    + `lemon.c` from upstream check-in [1caff0fb]  (2019-01-15)
-    + `lempar.c` from upstream check-in [70fe8ec2]  (2018-12-03)
+    + `lemon.c` taken from upstream check-in [`1caff0fb`][1caff0fb]  (2019-01-15)
+    + `lempar.c` taken from upstream check-in [`70fe8ec2`][70fe8ec2]  (2018-12-03)
 
 <!-----------------------------------------------------------------------------
                                REFERENCE LINKS
@@ -122,18 +127,23 @@ In the following changelog, "upstream" refers to the [SQLite] project hosting th
 [examples]: ./examples/ "Navigate folder"
 [sliced]: ./sliced/ "Navigate folder"
 
-<!-- upstream sources & check-ins -->
+<!-- upstream sources & check-ins (newest on top) -->
 
-[us lemon.c]: https://www.sqlite.org/src/file/tool/lemon.c "View upstream source file"
+[us lemon.c]: https://www.sqlite.org/src/file/tool/lemon.c "View latest upstream source file version"
+[fccfb8a9]: https://www.sqlite.org/src/info/fccfb8a9ed3c1df9 "View upstream check-in"
+[2da0eea0]: https://www.sqlite.org/src/info/2da0eea02d128c37 "View upstream check-in"
 [ca068d82]: https://www.sqlite.org/src/info/ca068d82387fc3cd "View upstream check-in"
 [1caff0fb]: https://www.sqlite.org/src/info/1caff0fb0b2051e2 "View upstream check-in"
-[2da0eea0]: https://www.sqlite.org/src/info/2da0eea02d128c37 "View upstream check-in"
 
 
-[us lempar.c]: https://www.sqlite.org/src/file/tool/lempar.c "View upstream source file"
-[70fe8ec2]: https://www.sqlite.org/src/info/70fe8ec2ae3099b8 "View upstream check-in"
+[us lempar.c]: https://www.sqlite.org/src/file/tool/lempar.c "View latest upstream source file version"
+[4d6d2fc0]: https://www.sqlite.org/src/info/4d6d2fc046d586a1 "View upstream check-in"
 [9e664585]: https://www.sqlite.org/src/info/9e66458592d40fbd "View upstream check-in"
+[70fe8ec2]: https://www.sqlite.org/src/info/70fe8ec2ae3099b8 "View upstream check-in"
 
+
+[us lemon.html]: https://www.sqlite.org/src/file/doc/lemon.html "View latest upstream source file version"
+[9c9c46dc]: https://www.sqlite.org/src/info/9c9c46dcbe92aeab "View upstream check-in"
 
 [official Lemon documentation]: https://sqlite.org/src/doc/trunk/doc/lemon.html "View original HTML documentation"
 
@@ -143,6 +153,7 @@ In the following changelog, "upstream" refers to the [SQLite] project hosting th
 [Bison]: https://www.gnu.org/software/bison/ "Visit GNU Bison website"
 [Yacc]: https://en.wikipedia.org/wiki/Yacc "Wikipedia page on Yacc"
 [Tcl]: https://www.tcl.tk/ "Visit Tcl website"
+[EditorConfig]: https://editorconfig.org/ "Visit EditorConfig website"
 
 <!-- people -->
 

@@ -128,6 +128,7 @@ int main(int argc, char **argv)
   static int mhflag = 0;
   static int nolinenosflag = 0;
   static int noResort = 0;
+  static int sqlFlag = 0;
 
   static struct s_options options[] = {
     {OPT_FLAG, "b", (char*)&basisflag, "Print only the basis in report."},
@@ -146,6 +147,8 @@ int main(int argc, char **argv)
     {OPT_FLAG, "r", (char*)&noResort, "Do not sort or renumber states"},
     {OPT_FLAG, "s", (char*)&statistics,
                                    "Print parser stats to standard output."},
+    {OPT_FLAG, "S", (char*)&sqlFlag,
+                    "Generate the *.sql file describing the parser tables."},
     {OPT_FLAG, "x", (char*)&version, "Print the version number."},
     {OPT_FSTR, "T", (char*)handle_T_option, "Specify a template file."},
     {OPT_FSTR, "W", 0, "Ignored.  (Placeholder for '-W' compiler options.)"},
@@ -207,6 +210,7 @@ int main(int argc, char **argv)
   for(i=0, rp=lem.rule; rp; rp=rp->next){
     rp->iRule = rp->code ? i++ : -1;
   }
+  lem.nruleWithAction = i;
   for(rp=lem.rule; rp; rp=rp->next){
     if( rp->iRule<0 ) rp->iRule = i++;
   }
@@ -254,7 +258,7 @@ int main(int argc, char **argv)
     if( !quiet ) ReportOutput(&lem);
 
     /* Generate the source code for the parser */
-    ReportTable(&lem, mhflag);
+    ReportTable(&lem, mhflag, sqlFlag);
 
     /* Produce a header file for use by the scanner.  (This step is
     ** omitted if the "-m" option is used because makeheaders will
