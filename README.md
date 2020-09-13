@@ -28,6 +28,7 @@ Project maintained by [Tristano Ajmone] since 2019/04/23.
         - [Lemon PHP](#lemon-php)
         - [Lemon Rust](#lemon-rust)
     - [Lemon Ports](#lemon-ports)
+        - [lemon-mint \(Rust\)](#lemon-mint-rust)
         - [pomelo \(Rust\)](#pomelo-rust)
     - [Lemon Inspired](#lemon-inspired)
         - [limecc \(Python\)](#limecc-python)
@@ -169,7 +170,16 @@ Lemon Rust is now deprecated in favour of [pomelo], by same author.
 
 ## Lemon Ports
 
-Lemon reimplementations in other languages
+Lemon implementations in other programming languages.
+
+### lemon-mint (Rust)
+
+- https://github.com/jeremiah-shaulov/lemon-mint
+- https://lib.rs/crates/lemon-mint
+
+By [Jeremiah Shaulov], released under MIT License.
+
+Implementation of the Lemon parser generator as a Rust library with API.
 
 ### pomelo (Rust)
 
@@ -320,6 +330,7 @@ Since the book is now out of print, the author has generously made it available 
 [@sergeyklay]: https://github.com/sergeyklay "View Serghei Iakovlev's GitHub profile"
 [Allen Holub]: https://holub.com "Visit Allen Holub's website"
 [Artem Butusov]: https://github.com/sormy "View Artem Butusov's GitHub profile"
+[Jeremiah Shaulov]: https://github.com/jeremiah-shaulov "View Jeremiah Shaulov's GitHub profile"
 [Martin Vejnár]: https://github.com/avakar "View Martin Vejnár's GitHub profile"
 [Masafumi Oyamada]: http://mooz.github.io/ "Visit Masafumi Oyamada's website"
 [Rodrigo Rivas Costa]: https://github.com/rodrigorc "View Rodrigo Rivas Costa's GitHub profile"
