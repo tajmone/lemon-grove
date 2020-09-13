@@ -11,7 +11,12 @@ Original document downloaded on 2019/04/23 from SQLite website:
 Converted from html to GFM by Tristano Ajmone for the "Lemon Grove" project:
     https://github.com/tajmone/lemon-grove
 
-Last edited: 2020/09/13 -- updated to check-in [84d54eb3] 2020-09-01
+Requires the Sublime Text 3 package MarkdownTOC to auto-update the TOC:
+    https://packagecontrol.io/packages/MarkdownTOC
+
+This document is in the public domain.
+
+Last edited: 2020/09/13 -- updated to check-in [84d54eb3] 2020-09-01.
 ------------------------------------------------------------------------------>
 
 
@@ -34,31 +39,7 @@ Last edited: 2020/09/13 -- updated to check-in [84d54eb3] 2020-09-01
     - [Grammar Rules](#grammar-rules)
     - [Precedence Rules](#precedence-rules)
     - [Special Directives](#special-directives)
-        - [The `%code` directive](#the-code-directive)
-        - [The `%default_destructor` directive](#the-default_destructor-directive)
-        - [The `%default_type` directive](#the-default_type-directive)
-        - [The `%destructor` directive](#the-destructor-directive)
-        - [The `%extra_argument` directive](#the-extra_argument-directive)
-        - [The `%extra_context` directive](#the-extra_context-directive)
-        - [The `%fallback` directive](#the-fallback-directive)
-        - [The `%if` directive and its friends](#the-if-directive-and-its-friends)
-        - [The `%include` directive](#the-include-directive)
-        - [The `%left` directive](#the-left-directive)
-        - [The `%name` directive](#the-name-directive)
-        - [The `%nonassoc` directive](#the-nonassoc-directive)
-        - [The `%parse_accept` directive](#the-parse_accept-directive)
-        - [The `%parse_failure` directive](#the-parse_failure-directive)
-        - [The `%right` directive](#the-right-directive)
-        - [The `%stack_overflow` directive](#the-stack_overflow-directive)
-        - [The `%stack_size` directive](#the-stack_size-directive)
-        - [The `%start_symbol` directive](#the-start_symbol-directive)
-        - [The `%syntax_error` directive](#the-syntax_error-directive)
-        - [The `%token_class` directive](#the-token_class-directive)
-        - [The `%token_destructor` directive](#the-token_destructor-directive)
-        - [The `%token_prefix` directive](#the-token_prefix-directive)
-        - [The `%token_type` and `%type` directives](#the-token_type-and-type-directives)
-        - [The `%wildcard` directive](#the-wildcard-directive)
-    - [Error Processing](#error-processing)
+- [Error Processing](#error-processing)
 - [History of Lemon](#history-of-lemon)
 - [Copyright](#copyright)
 
@@ -69,7 +50,7 @@ Last edited: 2020/09/13 -- updated to check-in [84d54eb3] 2020-09-01
 
 ## Security Note
 
-The language parser code created by Lemon is very robust and is well-suited for use in internet-facing applications that need to safely process maliciously crafted inputs.
+The language parser code created by Lemon is very robust and is well-suited for use in Internet-facing applications that need to safely process maliciously crafted inputs.
 
 The "`lemon.exe`" command-line tool itself works great when given a valid input grammar file and almost always gives helpful error messages for malformed inputs. However, it is possible for a malicious user to craft a grammar file that will cause `lemon.exe` to crash. We do not see this as a problem, as `lemon.exe` is not intended to be used with hostile inputs. To summarize:
 
@@ -110,22 +91,22 @@ The behavior of Lemon can be modified using command-line options. You can obtain
 
 As of this writing, the following command-line options are supported:
 
-| command&#x2011;line&nbsp;option |                                                                 description                                                                 |
-|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| `-b`                            | Show only the basis for each parser state in the report file.                                                                               |
-| `-c`                            | Do not compress the generated action tables. The parser will be a little larger and slower, but it will detect syntax errors sooner.        |
-| `-d<directory>`                 | Write all output files into *directory*. Normally, output files are written into the directory that contains the input grammar file.        |
-| `-D<name>`                      | Define C preprocessor macro *name*. This macro is usable by `%ifdef` and `%ifndef`, and `%if` lines in the grammar file.                    |
-| `-E`                            | Run the `%if` preprocessor step only and print the revised grammar file.                                                                    |
-| `-g`                            | Do not generate a parser. Instead write the input grammar to standard output with all comments, actions, and other extraneous text removed. |
-| `-l`                            | Omit `#line` directives in the generated parser C code.                                                                                     |
-| `-m`                            | Cause the output C source code to be compatible with the "makeheaders" program.                                                             |
-| `-p`                            | Display all conflicts that are resolved by [precedence rules].                                                                              |
-| `-q`                            | Suppress generation of the report file.                                                                                                     |
-| `-r`                            | Do not sort or renumber the parser states as part of optimization.                                                                          |
-| `-s`                            | Show parser statistics before exiting.                                                                                                      |
-| `-T<file>`                      | Use *file* as the template for the generated C-code parser implementation.                                                                  |
-| `-x`                            | Print the Lemon version number.                                                                                                             |
+| command&#x2011;line&nbsp;option |                                                                     description                                                                      |
+|---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `-b`                            | Show only the basis for each parser state in the report file.                                                                                        |
+| `-c`                            | Do not compress the generated action tables. The parser will be a little larger and slower, but it will detect syntax errors sooner.                 |
+| `-d<directory>`                 | Write all output files into *directory*. Normally, output files are written into the directory that contains the input grammar file.                 |
+| `-D<name>`                      | Define C preprocessor macro *name*. This macro is usable by [`%ifdef`][%ifdef] and [`%ifndef`][%ifndef], and [`%if`][%if] lines in the grammar file. |
+| `-E`                            | Run the [`%if`][%if] preprocessor step only and print the revised grammar file.                                                                      |
+| `-g`                            | Do not generate a parser. Instead write the input grammar to standard output with all comments, actions, and other extraneous text removed.          |
+| `-l`                            | Omit `#line` directives in the generated parser C code.                                                                                              |
+| `-m`                            | Cause the output C source code to be compatible with the "makeheaders" program.                                                                      |
+| `-p`                            | Display all conflicts that are resolved by [precedence rules].                                                                                       |
+| `-q`                            | Suppress generation of the report file.                                                                                                              |
+| `-r`                            | Do not sort or renumber the parser states as part of optimization.                                                                                   |
+| `-s`                            | Show parser statistics before exiting.                                                                                                               |
+| `-T<file>`                      | Use *file* as the template for the generated C-code parser implementation.                                                                           |
+| `-x`                            | Print the Lemon version number.                                                                                                                      |
 
 ### The Parser Interface
 
@@ -155,7 +136,7 @@ Parse(pParser, hTokenID, sTokenData, pArg);
 
 The first argument to the `Parse()` routine is the pointer returned by `ParseAlloc()`. The second argument is a small positive integer that tells the parser the type of the next token in the data stream. There is one token type for each terminal symbol in the grammar. The "`gram.h`" file generated by Lemon contains `#define` statements that map symbolic terminal symbol names into appropriate integer values. A value of 0 for the second argument is a special flag to the parser to indicate that the end of input has been reached. The third argument is the value of the given token. By default, the type of the third argument is `void*`, but the grammar will usually redefine this type to be some kind of structure. Typically the second argument will be a broad category of tokens such as "identifier" or "number" and the third argument will be the name of the identifier or the value of the number.
 
-The `Parse()` function may have either three or four arguments, depending on the grammar. If the grammar specification file requests it (via the `%extra_argument` directive), the `Parse()` function will have a fourth parameter that can be of any type chosen by the programmer. The parser doesn’t do anything with this argument except to pass it through to action routines. This is a convenient mechanism for passing state information down to the action routines without having to use global variables.
+The `Parse()` function may have either three or four arguments, depending on the grammar. If the grammar specification file requests it (via the [`%extra_argument`][%extra_argument] directive), the `Parse()` function will have a fourth parameter that can be of any type chosen by the programmer. The parser doesn’t do anything with this argument except to pass it through to action routines. This is a convenient mechanism for passing state information down to the action routines without having to use global variables.
 
 A typical use of a Lemon parser might look something like the following:
 
@@ -210,11 +191,11 @@ After this routine is called, a short (one-line) message is written to the desig
 
 #### Allocating The Parse Object On Stack
 
-If all calls to the `Parse()` interface are made from within `%code` directives, then the parse object can be allocated from the stack rather than from the heap. These are the steps:
+If all calls to the `Parse()` interface are made from within [`%code`][%code] directives, then the parse object can be allocated from the stack rather than from the heap. These are the steps:
 
 - Declare a local variable of type "`yyParser`"
 - Initialize the variable using `ParseInit()`
-- Pass a pointer to the variable in calls ot `Parse()`
+- Pass a pointer to the variable in calls to `Parse()`
 - Deallocate substructure in the parse variable using `ParseFinalize()`.
 
 The following code illustrates how this is done:
@@ -245,9 +226,9 @@ void ParseTrace(FILE *stream, char *zPrefix);
 
 Notes:
 
-- Use the `%name` directive to change the "`Parse`" prefix names of the procedures in the interface.
-- Use the `%token_type` directive to define the "`ParseTOKENTYPE`" type.
-- Use the `%extra_argument` directive to specify the type and name of the 4th parameter to the `Parse()` function.
+- Use the [`%name`][%name] directive to change the "`Parse`" prefix names of the procedures in the interface.
+- Use the [`%token_type`][%token_type] directive to define the "`ParseTOKENTYPE`" type.
+- Use the [`%extra_argument`][%extra_argument] directive to specify the type and name of the 4th parameter to the `Parse()` function.
 
 
 ### Differences With YACC and BISON
@@ -294,7 +275,7 @@ Yacc and bison allow terminal symbols to have either alphanumeric names or to be
 
 ### Grammar Rules
 
-The main component of a Lemon grammar file is a sequence of grammar rules. Each grammar rule consists of a nonterminal symbol followed by the special symbol `::=` and then a list of terminals and/or nonterminals. The rule is terminated by a period. The list of terminals and nonterminals on the right-hand side of the rule can be empty. Rules can occur in any order, except that the left-hand side of the first rule is assumed to be the start symbol for the grammar (unless specified otherwise using the `%start_symbol` directive described below.) A typical sequence of grammar rules might look something like this:
+The main component of a Lemon grammar file is a sequence of grammar rules. Each grammar rule consists of a nonterminal symbol followed by the special symbol `::=` and then a list of terminals and/or nonterminals. The rule is terminated by a period. The list of terminals and nonterminals on the right-hand side of the rule can be empty. Rules can occur in any order, except that the left-hand side of the first rule is assumed to be the start symbol for the grammar (unless specified otherwise using the [`%start_symbol`][%start_symbol] directive described below.) A typical sequence of grammar rules might look something like this:
 
 ``` lemon-grammar
 expr ::= expr PLUS expr.
@@ -342,7 +323,7 @@ The Lemon notation for linking grammar rules to reduce actions also facilitates 
 
 Lemon resolves parsing ambiguities in exactly the same way as yacc and bison. A shift-reduce conflict is resolved in favor of the shift, and a reduce-reduce conflict is resolved by reducing whichever rule comes first in the grammar file.
 
-Just like in yacc and bison, Lemon allows a measure of control over the resolution of parsing conflicts using precedence rules. A precedence value can be assigned to any terminal symbol using the `%left`, `%right` or `%nonassoc` directives. Terminal symbols mentioned in earlier directives have a lower precedence than terminal symbols mentioned in later directives. For example:
+Just like in yacc and bison, Lemon allows a measure of control over the resolution of parsing conflicts using precedence rules. A precedence value can be assigned to any terminal symbol using the [`%left`][%left], [`%right`][%right] or [`%nonassoc`][%nonassoc] directives. Terminal symbols mentioned in earlier directives have a lower precedence than terminal symbols mentioned in later directives. For example:
 
 ``` lemon-grammar
 %left AND.
@@ -429,63 +410,64 @@ Directives in Lemon can occur in any order. You can put them before the grammar 
 
 Lemon supports the following special directives:
 
-<!-- convert entries into links: -->
-
-- [`%code`](#the-code-directive)
-- [`%default_destructor`](#the-default_destructor-directive)
-- [`%default_type`](#the-default_type-directive)
-- [`%destructor`](#the-destructor-directive)
-- [`%else`](#the-if-directive-and-its-friends)
-- [`%endif`](#the-if-directive-and-its-friends)
-- [`%extra_argument`](#the-extra_argument-directive)
-- [`%fallback`](#the-fallback-directive)
-- [`%if`](#the-if-directive-and-its-friends)
-- [`%ifdef`](#the-if-directive-and-its-friends)
-- [`%ifndef`](#the-if-directive-and-its-friends)
-- [`%include`](#the-include-directive)
-- [`%left`](#the-left-directive)
-- [`%name`](#the-name-directive)
-- [`%nonassoc`](#the-nonassoc-directive)
-- [`%parse_accept`](#the-parse_accept-directive)
-- [`%parse_failure`](#the-parse_failure-directive)
-- [`%right`](#the-right-directive)
-- [`%stack_overflow`](#the-stack_overflow-directive)
-- [`%stack_size`](#the-stack_size-directive)
-- [`%start_symbol`](#the-start_symbol-directive)
-- [`%syntax_error`](#the-syntax_error-directive)
-- [`%token_class`](#the-token_class-directive)
-- [`%token_destructor`](#the-token_destructor-directive)
-- [`%token_prefix`](#the-token_prefix-directive)
-- [`%token_type`](#the-token_type-and-type-directives)
-- [`%type`](#the-token_type-and-type-directives)
-- [`%wildcard`](#the-wildcard-directive)
+- [`%code`][%code]
+- [`%default_destructor`][%default_destructor]
+- [`%default_type`][%default_type]
+- [`%destructor`][%destructor]
+- [`%else`][%else]
+- [`%endif`][%endif]
+- [`%extra_argument`][%extra_argument]
+- [`%fallback`][%fallback]
+- [`%if`][%if]
+- [`%ifdef`][%ifdef]
+- [`%ifndef`][%ifndef]
+- [`%include`][%include]
+- [`%left`][%left]
+- [`%name`][%name]
+- [`%nonassoc`][%nonassoc]
+- [`%parse_accept`][%parse_accept]
+- [`%parse_failure`][%parse_failure]
+- [`%right`][%right]
+- [`%stack_overflow`][%stack_overflow]
+- [`%stack_size`][%stack_size]
+- [`%start_symbol`][%start_symbol]
+- [`%syntax_error`][%syntax_error]
+- [`%token_class`][%token_class]
+- [`%token_destructor`][%token_destructor]
+- [`%token_prefix`][%token_prefix]
+- [`%token_type`][%token_type]
+- [`%type`][%type]
+- [`%wildcard`][%wildcard]
 
 Each of these directives will be described separately in the following sections:
 
-
+<!-- MarkdownTOC:excluded -->
 #### The `%code` directive
 
-The `%code` directive is used to specify additional C code that is added to the end of the main output file. This is similar to the `%include` directive except that `%include` is inserted at the beginning of the main output file.
+The `%code` directive is used to specify additional C code that is added to the end of the main output file. This is similar to the [`%include`][%include] directive except that `%include` is inserted at the beginning of the main output file.
 
 `%code` is typically used to include some action routines or perhaps a tokenizer or even the `main()` function as part of the output file.
 
 There can be multiple `%code` directives. The arguments of all `%code` directives are concatenated.
 
+<!-- MarkdownTOC:excluded -->
 #### The `%default_destructor` directive
 
-The `%default_destructor` directive specifies a destructor to use for non-terminals that do not have their own destructor specified by a separate `%destructor` directive. See the documentation on the `%destructor` directive below for additional information.
+The `%default_destructor` directive specifies a destructor to use for non-terminals that do not have their own destructor specified by a separate [`%destructor`][%destructor] directive. See the documentation on the `%destructor` directive below for additional information.
 
 In some grammars, many different non-terminal symbols have the same data type and hence the same destructor. This directive is a convenient way to specify the same destructor for all those non-terminals using a single statement.
 
 
+<!-- MarkdownTOC:excluded -->
 #### The `%default_type` directive
 
-The `%default_type` directive specifies the data type of non-terminal symbols that do not have their own data type defined using a separate `%type` directive.
+The `%default_type` directive specifies the data type of non-terminal symbols that do not have their own data type defined using a separate [`%type`][%type] directive.
 
 
+<!-- MarkdownTOC:excluded -->
 #### The `%destructor` directive
 
-The `%destructor` directive is used to specify a destructor for a non-terminal symbol. (See also the `%token_destructor` directive which is used to specify a destructor for terminal symbols.)
+The `%destructor` directive is used to specify a destructor for a non-terminal symbol. (See also the [`%token_destructor`][%token_destructor] directive which is used to specify a destructor for terminal symbols.)
 
 A non-terminal’s destructor is called to dispose of the non-terminal’s value whenever the non-terminal is popped from the stack. This includes all of the following circumstances:
 
@@ -510,6 +492,7 @@ It is important to note that the value of a non-terminal is passed to the destru
 Destructors help avoid memory leaks by automatically freeing allocated objects when they go out of scope. To do the same using yacc or bison is much more difficult.
 
 
+<!-- MarkdownTOC:excluded -->
 #### The `%extra_argument` directive
 
 The `%extra_argument` directive instructs Lemon to add a 4th parameter to the parameter list of the `Parse()` function it generates. Lemon doesn’t do anything itself with this extra argument, but it does make the argument available to C-code action routines, destructors, and so forth. For example, if the grammar file contains:
@@ -520,9 +503,10 @@ The `%extra_argument` directive instructs Lemon to add a 4th parameter to the pa
 
 Then the `Parse()` function generated will have an 4th parameter of type `MyStruct*` and all action routines will have access to a variable named "`pAbc`" that is the value of the 4th parameter in the most recent call to `Parse()`.
 
-The `%extra_context` directive works the same except that it is passed in on the `ParseAlloc()` or `ParseInit()` routines instead of on `Parse()`.
+The [`%extra_context`][%extra_context] directive works the same except that it is passed in on the `ParseAlloc()` or `ParseInit()` routines instead of on `Parse()`.
 
 
+<!-- MarkdownTOC:excluded -->
 #### The `%extra_context` directive
 
 The `%extra_context` directive instructs Lemon to add a 2nd parameter to the parameter list of the `ParseAlloc()` and `ParseInit()` functions. Lemon doesn’t do anything itself with these extra argument, but it does store the value make it available to C-code action routines, destructors, and so forth. For example, if the grammar file contains:
@@ -533,9 +517,10 @@ The `%extra_context` directive instructs Lemon to add a 2nd parameter to the par
 
 Then the `ParseAlloc()` and `ParseInit()` functions will have an 2nd parameter of type `MyStruct*` and all action routines will have access to a variable named "`pAbc`" that is the value of that 2nd parameter.
 
-The `%extra_argument` directive works the same except that it is passed in on the `Parse()` routine instead of on `ParseAlloc()`/`ParseInit()`.
+The [`%extra_argument`][%extra_argument] directive works the same except that it is passed in on the `Parse()` routine instead of on `ParseAlloc()`/`ParseInit()`.
 
 
+<!-- MarkdownTOC:excluded -->
 #### The `%fallback` directive
 
 The `%fallback` directive specifies an alternative meaning for one or more tokens. The alternative meaning is tried if the original token would have generated a syntax error.
@@ -549,6 +534,7 @@ The syntax of `%fallback` is as follows:
 In words, the `%fallback` directive is followed by a list of token names terminated by a period. The first token name is the fallback token — the token to which all the other tokens fall back to. The second and subsequent arguments are tokens which fall back to the token identified by the first argument.
 
 
+<!-- MarkdownTOC:excluded -->
 #### The `%if` directive and its friends
 
 The `%if`, `%ifdef`, `%ifndef`, `%else`, and `%endif` directives are similar to `#if`, `#ifdef`, `#ifndef`, `#else`, and `#endif` in the C-preprocessor, just not as general. Each of these directives must begin at the left margin. No whitespace is allowed between the `%` and the directive name.
@@ -562,6 +548,7 @@ An optional "`%else`" directive can occur anywhere in between a `%ifdef`, `%ifnd
 Note that the argument to `%ifdef` and `%ifndef` is intended to be a single preprocessor symbol name, not a general expression. Use the "`%if`" directive for general expressions.
 
 
+<!-- MarkdownTOC:excluded -->
 #### The `%include` directive
 
 The `%include` directive specifies C code that is included at the top of the generated parser. You can include any text you want — the Lemon parser generator copies it blindly. If you have multiple `%include` directives in your grammar file, their values are concatenated so that all `%include` code ultimately appears near the top of the generated parser, in the same order as it appeared in the grammar.
@@ -574,12 +561,13 @@ The `%include` directive is very handy for getting some extra `#include` preproc
 
 This might be needed, for example, if some of the C actions in the grammar call functions that are prototyped in "`unistd.h`".
 
-Use the `%code` directive to add code to the end of the generated parser.
+Use the [`%code`][%code] directive to add code to the end of the generated parser.
 
 
+<!-- MarkdownTOC:excluded -->
 #### The `%left` directive
 
-The `%left` directive is used (along with the `%right` and `%nonassoc` directives) to declare precedences of terminal symbols. Every terminal symbol whose name appears after a `%left` directive but before the next period (`.`) is given the same left-associative precedence value. Subsequent `%left` directives have higher precedence. For example:
+The `%left` directive is used (along with the [`%right`][%right] and [`%nonassoc`][%nonassoc] directives) to declare precedences of terminal symbols. Every terminal symbol whose name appears after a `%left` directive but before the next period (`.`) is given the same left-associative precedence value. Subsequent `%left` directives have higher precedence. For example:
 
 ``` lemon-grammar
 %left AND.
@@ -595,6 +583,7 @@ Note the period that terminates each `%left`, `%right` or `%nonassoc` directive.
 LALR(1) grammars can get into a situation where they require a large amount of stack space if you make heavy use or right-associative operators. For this reason, it is recommended that you use `%left` rather than `%right` whenever possible.
 
 
+<!-- MarkdownTOC:excluded -->
 #### The `%name` directive
 
 By default, the functions generated by Lemon all begin with the five-character string "Parse". You can change this string to something different using the `%name` directive. For instance:
@@ -613,11 +602,13 @@ Putting this directive in the grammar file will cause Lemon to generate function
 The `%name` directive allows you to generate two or more different parsers and link them all into the same executable.
 
 
+<!-- MarkdownTOC:excluded -->
 #### The `%nonassoc` directive
 
-This directive is used to assign non-associative precedence to one or more terminal symbols. See the section on [precedence rules] or on the [`%left` directive][left] for additional information.
+This directive is used to assign non-associative precedence to one or more terminal symbols. See the section on [precedence rules] or on the [`%left`][%left] directive for additional information.
 
 
+<!-- MarkdownTOC:excluded -->
 #### The `%parse_accept` directive
 
 The `%parse_accept` directive specifies a block of C code that is executed whenever the parser accepts its input string. To "accept" an input string means that the parser was able to process all tokens without error.
@@ -631,6 +622,7 @@ For example:
 ```
 
 
+<!-- MarkdownTOC:excluded -->
 #### The `%parse_failure` directive
 
 The `%parse_failure` directive specifies a block of C code that is executed whenever the parser fails complete. This code is not executed until the parser has tried and failed to resolve an input error using is usual error recovery strategy. The routine is only invoked when parsing is unable to continue.
@@ -642,11 +634,13 @@ The `%parse_failure` directive specifies a block of C code that is executed when
 ```
 
 
+<!-- MarkdownTOC:excluded -->
 #### The `%right` directive
 
-This directive is used to assign right-associative precedence to one or more terminal symbols. See the section on [precedence rules] or on the [`%left` directive][left] for additional information.
+This directive is used to assign right-associative precedence to one or more terminal symbols. See the section on [precedence rules] or on the [`%left`][%left] directive for additional information.
 
 
+<!-- MarkdownTOC:excluded -->
 #### The `%stack_overflow` directive
 
 The `%stack_overflow` directive specifies a block of C code that is executed if the parser’s internal stack ever overflows. Typically this just prints an error message. After a stack overflow, the parser will be unable to continue and must be reset.
@@ -672,6 +666,7 @@ list ::= .
 ```
 
 
+<!-- MarkdownTOC:excluded -->
 #### The `%stack_size` directive
 
 If stack overflow is a problem and you can’t resolve the trouble by using left-recursion, then you might want to increase the size of the parser’s stack using this directive. Put an positive integer after the `%stack_size` directive and Lemon will generate a parse with a stack of the requested size. The default value is 100.
@@ -681,6 +676,7 @@ If stack overflow is a problem and you can’t resolve the trouble by using left
 ```
 
 
+<!-- MarkdownTOC:excluded -->
 #### The `%start_symbol` directive
 
 By default, the start symbol for the grammar that Lemon generates is the first non-terminal that appears in the grammar file. But you can choose a different start symbol using the `%start_symbol` directive.
@@ -690,16 +686,19 @@ By default, the start symbol for the grammar that Lemon generates is the first n
 ```
 
 
+<!-- MarkdownTOC:excluded -->
 #### The `%syntax_error` directive
 
 See [Error Processing].
 
 
+<!-- MarkdownTOC:excluded -->
 #### The `%token_class` directive
 
 Undocumented. Appears to be related to the MULTITERMINAL concept. [Implementation](http://sqlite.org/src/fdiff?v1=796930d5fc2036c7&v2=624b24c5dc048e09&sbs=0).
 
 
+<!-- MarkdownTOC:excluded -->
 #### The `%token_destructor` directive
 
 The `%destructor` directive assigns a destructor to a non-terminal symbol. (See the description of the `%destructor` directive above.) The `%token_destructor` directive does the same thing for all terminal symbols.
@@ -707,6 +706,7 @@ The `%destructor` directive assigns a destructor to a non-terminal symbol. (See 
 Unlike non-terminal symbols, which may each have a different data type for their values, terminals all use the same data type (defined by the `%token_type` directive) and so they use a common destructor. Other than that, the token destructor works just like the non-terminal destructors.
 
 
+<!-- MarkdownTOC:excluded -->
 #### The `%token_prefix` directive
 
 Lemon generates `#defines` that assign small integer constants to each terminal symbol in the grammar. If desired, Lemon will add a prefix specified by this directive to each of the `#defines` it generates.
@@ -736,6 +736,7 @@ to cause Lemon to produce these symbols instead:
 ```
 
 
+<!-- MarkdownTOC:excluded -->
 #### The `%token_type` and `%type` directives
 
 These directives are used to specify the data types for values on the parser’s stack associated with terminal and non-terminal symbols. The values of all terminal symbols must be of the same type. This turns out to be the same data type as the 3rd parameter to the `Parse()` function generated by Lemon. Typically, you will make the value of a terminal symbol be a pointer to some kind of token structure. Like this:
@@ -755,6 +756,7 @@ Non-terminal symbols can each have their own data types. Typically the data type
 Each entry on the parser’s stack is actually a union containing instances of all data types for every non-terminal and terminal symbol. Lemon will automatically use the correct element of this union depending on what the corresponding non-terminal or terminal symbol is. But the grammar designer should keep in mind that the size of the union will be the size of its largest element. So if you have a single non-terminal whose data type requires 1K of storage, then your 100 entry parser stack will require 100K of heap space. If you are willing and able to pay that price, fine. You just need to know.
 
 
+<!-- MarkdownTOC:excluded -->
 #### The `%wildcard` directive
 
 The `%wildcard` directive is followed by a single token name and a period. This directive specifies that the identified token should match any input token.
@@ -762,13 +764,14 @@ The `%wildcard` directive is followed by a single token name and a period. This 
 When the generated parser has the choice of matching an input against the wildcard token and some other token, the other token is always used. The wildcard token is only matched if there are no alternatives.
 
 
-### Error Processing
+## Error Processing
 
 After extensive experimentation over several years, it has been discovered that the error recovery strategy used by yacc is about as good as it gets. And so that is what Lemon uses.
 
 When a Lemon-generated parser encounters a syntax error, it first invokes the code specified by the `%syntax_error` directive, if any. It then enters its error recovery strategy. The error recovery strategy is to begin popping the parsers stack until it enters a state where it is permitted to shift a special non-terminal symbol named "error". It then shifts this non-terminal and continues parsing. The `%syntax_error` routine will not be called again until at least three new tokens have been successfully shifted.
 
 If the parser pops its stack until the stack is empty, and it still is unable to shift the error symbol, then the `%parse_failure` routine is invoked and the parser resets itself to its start state, ready to begin parsing a new file. This is what will happen at the very first syntax error, of course, if there are no instances of the "error" non-terminal in your grammar.
+
 
 ## History of Lemon
 
@@ -804,8 +807,36 @@ The code comes with no warranty. If it breaks, you get to keep both pieces.
 <!-- Cross Reference Links -->
 
 [Error Processing]: #error-processing "Jump to section"
-[left]: #the-left-directive "Jump to section"
 [precedence rules]: #precedence-rules "Jump to section"
+
+[%code]: #the-code-directive "Jump to section"
+[%default_destructor]: #the-default_destructor-directive "Jump to section"
+[%default_type]: #the-default_type-directive "Jump to section"
+[%destructor]: #the-destructor-directive "Jump to section"
+[%else]: #the-if-directive-and-its-friends "Jump to section"
+[%endif]: #the-if-directive-and-its-friends "Jump to section"
+[%extra_argument]: #the-extra_argument-directive "Jump to section"
+[%fallback]: #the-fallback-directive "Jump to section"
+[%if]: #the-if-directive-and-its-friends "Jump to section"
+[%ifdef]: #the-if-directive-and-its-friends "Jump to section"
+[%ifndef]: #the-if-directive-and-its-friends "Jump to section"
+[%include]: #the-include-directive "Jump to section"
+[%left]: #the-left-directive "Jump to section"
+[%name]: #the-name-directive "Jump to section"
+[%nonassoc]: #the-nonassoc-directive "Jump to section"
+[%parse_accept]: #the-parse_accept-directive "Jump to section"
+[%parse_failure]: #the-parse_failure-directive "Jump to section"
+[%right]: #the-right-directive "Jump to section"
+[%stack_overflow]: #the-stack_overflow-directive "Jump to section"
+[%stack_size]: #the-stack_size-directive "Jump to section"
+[%start_symbol]: #the-start_symbol-directive "Jump to section"
+[%syntax_error]: #the-syntax_error-directive "Jump to section"
+[%token_class]: #the-token_class-directive "Jump to section"
+[%token_destructor]: #the-token_destructor-directive "Jump to section"
+[%token_prefix]: #the-token_prefix-directive "Jump to section"
+[%token_type]: #the-token_type-and-type-directives "Jump to section"
+[%type]: #the-token_type-and-type-directives "Jump to section"
+[%wildcard]: #the-wildcard-directive "Jump to section"
 
 <!-- project files -->
 
