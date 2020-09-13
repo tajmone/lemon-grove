@@ -11,7 +11,7 @@ Original document downloaded on 2019/04/23 from SQLite website:
 Converted from html to GFM by Tristano Ajmone for the "Lemon Grove" project:
     https://github.com/tajmone/lemon-grove
 
-Last edited: 2019/04/24
+Last edited: 2020/09/13 -- updated to check-in [84d54eb3] 2020-09-01
 ------------------------------------------------------------------------------>
 
 
@@ -25,7 +25,10 @@ Last edited: 2019/04/24
 - [Theory of Operation](#theory-of-operation)
     - [Command Line Options](#command-line-options)
     - [The Parser Interface](#the-parser-interface)
+        - [Allocating The Parse Object On Stack](#allocating-the-parse-object-on-stack)
+        - [Interface Summary](#interface-summary)
     - [Differences With YACC and BISON](#differences-with-yacc-and-bison)
+    - [Building The "lemon" or "lemon.exe" Executable](#building-the-lemon-or-lemonexe-executable)
 - [Input File Syntax](#input-file-syntax)
     - [Terminals and Nonterminals](#terminals-and-nonterminals)
     - [Grammar Rules](#grammar-rules)
@@ -38,7 +41,7 @@ Last edited: 2019/04/24
         - [The `%extra_argument` directive](#the-extra_argument-directive)
         - [The `%extra_context` directive](#the-extra_context-directive)
         - [The `%fallback` directive](#the-fallback-directive)
-        - [The `%ifdef`, `%ifndef`, and `%endif` directives](#the-ifdef-ifndef-and-endif-directives)
+        - [The `%if` directive and its friends](#the-if-directive-and-its-friends)
         - [The `%include` directive](#the-include-directive)
         - [The `%left` directive](#the-left-directive)
         - [The `%name` directive](#the-name-directive)
@@ -56,6 +59,8 @@ Last edited: 2019/04/24
         - [The `%token_type` and `%type` directives](#the-token_type-and-type-directives)
         - [The `%wildcard` directive](#the-wildcard-directive)
     - [Error Processing](#error-processing)
+- [History of Lemon](#history-of-lemon)
+- [Copyright](#copyright)
 
 <!-- /MarkdownTOC -->
 
@@ -74,17 +79,18 @@ The "`lemon.exe`" command-line tool itself works great when given a valid input 
 
 ## Theory of Operation
 
-The main goal of Lemon is to translate a [context free grammar]  (CFG) for a particular language into C code that implements a parser for that language. The program has two inputs:
+Lemon is computer program that translates a [context free grammar]  (CFG) for for a particular language into C code that implements a parser for that
+language. The Lemon program has two inputs:
 
 - The grammar specification.
 - A parser template file.
 
-Typically, only the grammar specification is supplied by the programmer. Lemon comes with a default parser template which works fine for most applications. But the user is free to substitute a different parser template if desired.
+Typically, only the grammar specification is supplied by the programmer. Lemon comes with a default parser template (["`lempar.c`"][lempar.c]) that works fine for most applications. But the user is free to substitute a different parser template if desired.
 
 Depending on command-line options, Lemon will generate up to three output files.
 
-- C code to implement the parser.
-- A header file defining an integer ID for each terminal symbol.
+- C code to implement a parser for the input grammar.
+- A header file defining an integer ID for each terminal symbol (or "token").
 - An information file that describes the states of the generated parser automaton.
 
 By default, all three of these output files are generated. The header file is suppressed if the "`-m`" command-line option is used and the report file is omitted when "`-q`" is selected.
@@ -109,14 +115,15 @@ As of this writing, the following command-line options are supported:
 | `-b`                            | Show only the basis for each parser state in the report file.                                                                               |
 | `-c`                            | Do not compress the generated action tables. The parser will be a little larger and slower, but it will detect syntax errors sooner.        |
 | `-d<directory>`                 | Write all output files into *directory*. Normally, output files are written into the directory that contains the input grammar file.        |
-| `-D<name>`                      | Define C preprocessor macro *name*. This macro is usable by `%ifdef` and `%ifndef` lines in the grammar file.                               |
+| `-D<name>`                      | Define C preprocessor macro *name*. This macro is usable by `%ifdef` and `%ifndef`, and `%if` lines in the grammar file.                    |
+| `-E`                            | Run the `%if` preprocessor step only and print the revised grammar file.                                                                    |
 | `-g`                            | Do not generate a parser. Instead write the input grammar to standard output with all comments, actions, and other extraneous text removed. |
 | `-l`                            | Omit `#line` directives in the generated parser C code.                                                                                     |
 | `-m`                            | Cause the output C source code to be compatible with the "makeheaders" program.                                                             |
 | `-p`                            | Display all conflicts that are resolved by [precedence rules].                                                                              |
 | `-q`                            | Suppress generation of the report file.                                                                                                     |
 | `-r`                            | Do not sort or renumber the parser states as part of optimization.                                                                          |
-| `-s`                            | Show parser statistics before existing.                                                                                                     |
+| `-s`                            | Show parser statistics before exiting.                                                                                                      |
 | `-T<file>`                      | Use *file* as the template for the generated C-code parser implementation.                                                                  |
 | `-x`                            | Print the Lemon version number.                                                                                                             |
 
@@ -176,7 +183,7 @@ ParseTree *ParseFile(const char *zFilename){
 
 This example shows a user-written routine that parses a file of text and returns a pointer to the parse tree. (All error-handling code is omitted from this example to keep it simple.) We assume the existence of some kind of tokenizer which is created using `TokenizerCreate()` on line 8 and deleted by `TokenizerFree()` on line 16. The `GetNextToken()` function on line 11 retrieves the next token from the input file and puts its type in the integer variable `hTokenId`. The `sToken` variable is assumed to be some kind of structure that contains details about each token, such as its complete text, what line it occurs on, etc.
 
-This example also assumes the existence of structure of type `ParserState` that holds state information about a particular parse. An instance of such a structure is created on line 6 and initialized on line 10. A pointer to this structure is passed into the `Parse()` routine as the optional 4th argument. The action routine specified by the grammar for the parser can use the `ParserState` structure to hold whatever information is useful and appropriate. In the example, we note that the `treeRoot` field of the `ParserState` structure is left pointing to the root of the parse tree.
+This example also assumes the existence of a structure of type `ParserState` that holds state information about a particular parse. An instance of such a structure is created on line 6 and initialized on line 10. A pointer to this structure is passed into the `Parse()` routine as the optional 4th argument. The action routine specified by the grammar for the parser can use the `ParserState` structure to hold whatever information is useful and appropriate. In the example, we note that the `treeRoot` field of the `ParserState` structure is left pointing to the root of the parse tree.
 
 The core of this example as it relates to Lemon is as follows:
 
@@ -201,6 +208,47 @@ ParseTrace(FILE *stream, char *zPrefix);
 
 After this routine is called, a short (one-line) message is written to the designated output stream every time the parser changes states or calls an action routine. Each such message is prefaced using the text given by `zPrefix`. This debugging output can be turned off by calling `ParseTrace()` again with a first argument of NULL (0).
 
+#### Allocating The Parse Object On Stack
+
+If all calls to the `Parse()` interface are made from within `%code` directives, then the parse object can be allocated from the stack rather than from the heap. These are the steps:
+
+- Declare a local variable of type "`yyParser`"
+- Initialize the variable using `ParseInit()`
+- Pass a pointer to the variable in calls ot `Parse()`
+- Deallocate substructure in the parse variable using `ParseFinalize()`.
+
+The following code illustrates how this is done:
+
+``` c
+ParseFile(){
+   yyParser x;
+   ParseInit( &x );
+   while( GetNextToken(pTokenizer,&hTokenId, &sToken) ){
+      Parse(&x, hTokenId, sToken);
+   }
+   Parse(&x, 0, sToken);
+   ParseFinalize( &x );
+}
+```
+
+#### Interface Summary
+
+Here is a quick overview of the C-language interface to a Lemon-generated parser:
+
+```c
+void *ParseAlloc( (void*(*malloc)(size_t) );
+void ParseFree(void *pParser, (void(*free)(void*) );
+void Parse(void *pParser, int tokenCode, ParseTOKENTYPE token, ...);
+void ParseTrace(FILE *stream, char *zPrefix);
+
+```
+
+Notes:
+
+- Use the `%name` directive to change the "`Parse`" prefix names of the procedures in the interface.
+- Use the `%token_type` directive to define the "`ParseTOKENTYPE`" type.
+- Use the `%extra_argument` directive to specify the type and name of the 4th parameter to the `Parse()` function.
+
 
 ### Differences With YACC and BISON
 
@@ -214,14 +262,25 @@ These differences may cause some initial confusion for programmers with prior ya
 
 <!-- convert to note block: -->
 
-> *Updated as of 2016-02-16:* The text above was written in the 1990s. We are told that Bison has lately been enhanced to support the tokenizer-calls-parser paradigm used by Lemon, and to obviate the need for global variables.
+> *Updated as of 2016-02-16:* The text above was written in the 1990s. We are told that Bison has lately been enhanced to support the tokenizer-calls-parser paradigm used by Lemon, eliminating the need for global variables.
 
+### Building The "lemon" or "lemon.exe" Executable
+
+The "`lemon`" or "`lemon.exe`" program is built from a single file of C-code named "[`lemon.c`][lemon.c]". The Lemon source code is generic C89 code that uses no unusual or non-standard libraries. Any reasonable C compiler should suffice to compile the lemon program. A command-line like the following will usually work:
+
+    cc -o lemon lemon.c
+
+On Windows machines with Visual C++ installed, bring up a "VS20*NN* x64 Native Tools Command Prompt" window and enter:
+
+    cl lemon.c
+
+Compiling Lemon really is that simple. Additional compiler options such as "`-O2`" or "`-g`" or `"-Wall`" can be added if desired, but they are not necessary.
 
 ## Input File Syntax
 
 The main purpose of the grammar specification file for Lemon is to define the grammar for the parser. But the input file also specifies additional information Lemon requires to do its job. Most of the work in using Lemon is in writing an appropriate grammar file.
 
-The grammar file for Lemon is, for the most part, free format. It does not have sections or divisions like yacc or bison. Any declaration can occur at any point in the file. Lemon ignores whitespace (except where it is needed to separate tokens), and it honors the same commenting conventions as C and C++.
+The grammar file for Lemon is, for the most part, a free format. It does not have sections or divisions like yacc or bison. Any declaration can occur at any point in the file. Lemon ignores whitespace (except where it is needed to separate tokens), and it honors the same commenting conventions as C and C++.
 
 
 ### Terminals and Nonterminals
@@ -376,11 +435,13 @@ Lemon supports the following special directives:
 - [`%default_destructor`](#the-default_destructor-directive)
 - [`%default_type`](#the-default_type-directive)
 - [`%destructor`](#the-destructor-directive)
-- [`%endif`](#the-ifdef-ifndef-and-endif-directives)
+- [`%else`](#the-if-directive-and-its-friends)
+- [`%endif`](#the-if-directive-and-its-friends)
 - [`%extra_argument`](#the-extra_argument-directive)
 - [`%fallback`](#the-fallback-directive)
-- [`%ifdef`](#the-ifdef-ifndef-and-endif-directives)
-- [`%ifndef`](#the-ifdef-ifndef-and-endif-directives)
+- [`%if`](#the-if-directive-and-its-friends)
+- [`%ifdef`](#the-if-directive-and-its-friends)
+- [`%ifndef`](#the-if-directive-and-its-friends)
 - [`%include`](#the-include-directive)
 - [`%left`](#the-left-directive)
 - [`%name`](#the-name-directive)
@@ -408,6 +469,7 @@ The `%code` directive is used to specify additional C code that is added to the 
 
 `%code` is typically used to include some action routines or perhaps a tokenizer or even the `main()` function as part of the output file.
 
+There can be multiple `%code` directives. The arguments of all `%code` directives are concatenated.
 
 #### The `%default_destructor` directive
 
@@ -463,13 +525,13 @@ The `%extra_context` directive works the same except that it is passed in on the
 
 #### The `%extra_context` directive
 
-The `%extra_context` directive instructs Lemon to add a 2th parameter to the parameter list of the `ParseAlloc()` and `ParseInif()` functions. Lemon doesn’t do anything itself with these extra argument, but it does store the value make it available to C-code action routines, destructors, and so forth. For example, if the grammar file contains:
+The `%extra_context` directive instructs Lemon to add a 2nd parameter to the parameter list of the `ParseAlloc()` and `ParseInit()` functions. Lemon doesn’t do anything itself with these extra argument, but it does store the value make it available to C-code action routines, destructors, and so forth. For example, if the grammar file contains:
 
 ``` lemon-grammar
 %extra_context { MyStruct *pAbc }
 ```
 
-Then the `ParseAlloc()` and `ParseInit()` functions will have an 2th parameter of type `MyStruct*` and all action routines will have access to a variable named "`pAbc`" that is the value of that 2th parameter.
+Then the `ParseAlloc()` and `ParseInit()` functions will have an 2nd parameter of type `MyStruct*` and all action routines will have access to a variable named "`pAbc`" that is the value of that 2nd parameter.
 
 The `%extra_argument` directive works the same except that it is passed in on the `Parse()` routine instead of on `ParseAlloc()`/`ParseInit()`.
 
@@ -487,13 +549,17 @@ The syntax of `%fallback` is as follows:
 In words, the `%fallback` directive is followed by a list of token names terminated by a period. The first token name is the fallback token — the token to which all the other tokens fall back to. The second and subsequent arguments are tokens which fall back to the token identified by the first argument.
 
 
-#### The `%ifdef`, `%ifndef`, and `%endif` directives
+#### The `%if` directive and its friends
 
-The `%ifdef`, `%ifndef`, and `%endif` directives are similar to `#ifdef`, `#ifndef`, and `#endif` in the C-preprocessor, just not as general. Each of these directives must begin at the left margin. No whitespace is allowed between the `%` and the directive name.
+The `%if`, `%ifdef`, `%ifndef`, `%else`, and `%endif` directives are similar to `#if`, `#ifdef`, `#ifndef`, `#else`, and `#endif` in the C-preprocessor, just not as general. Each of these directives must begin at the left margin. No whitespace is allowed between the `%` and the directive name.
 
 Grammar text in between `%ifdef MACRO` and the next nested `%endif` is ignored unless the "-DMACRO" command-line option is used. Grammar text betwen `%ifndef MACRO` and the next nested `%endif` is included except when the "-DMACRO" command-line option is used.
 
-Note that the argument to `%ifdef` and `%ifndef` must be a single preprocessor symbol name, not a general expression. There is no `%else` directive.
+The text in between "`%if` *CONDITIONAL*" and its corresponding `%endif` is included only if *CONDITIONAL* is true. The CONDITION is one or more macro names, optionally connected using the `||` and `&&` binary operators, the `!` unary operator, and grouped using balanced parentheses. Each term is true if the corresponding macro exists, and false if it does not exist.
+
+An optional "`%else`" directive can occur anywhere in between a `%ifdef`, `%ifndef`, or `%if` directive and its corresponding `%endif`.
+
+Note that the argument to `%ifdef` and `%ifndef` is intended to be a single preprocessor symbol name, not a general expression. Use the "`%if`" directive for general expressions.
 
 
 #### The `%include` directive
@@ -638,7 +704,7 @@ Undocumented. Appears to be related to the MULTITERMINAL concept. [Implementatio
 
 The `%destructor` directive assigns a destructor to a non-terminal symbol. (See the description of the `%destructor` directive above.) The `%token_destructor` directive does the same thing for all terminal symbols.
 
-Unlike non-terminal symbols which may each have a different data type for their values, terminals all use the same data type (defined by the `%token_type` directive) and so they use a common destructor. Other than that, the token destructor works just like the non-terminal destructors.
+Unlike non-terminal symbols, which may each have a different data type for their values, terminals all use the same data type (defined by the `%token_type` directive) and so they use a common destructor. Other than that, the token destructor works just like the non-terminal destructors.
 
 
 #### The `%token_prefix` directive
@@ -672,7 +738,7 @@ to cause Lemon to produce these symbols instead:
 
 #### The `%token_type` and `%type` directives
 
-These directives are used to specify the data types for values on the parser’s stack associated with terminal and non-terminal symbols. The values of all terminal symbols must be of the same type. This turns out to be the same data type as the 3rd parameter to the `Parse()` function generated by Lemon. Typically, you will make the value of a terminal symbol by a pointer to some kind of token structure. Like this:
+These directives are used to specify the data types for values on the parser’s stack associated with terminal and non-terminal symbols. The values of all terminal symbols must be of the same type. This turns out to be the same data type as the 3rd parameter to the `Parse()` function generated by Lemon. Typically, you will make the value of a terminal symbol be a pointer to some kind of token structure. Like this:
 
 ``` lemon-grammar
 %token_type    {Token*}
@@ -704,11 +770,34 @@ When a Lemon-generated parser encounters a syntax error, it first invokes the co
 
 If the parser pops its stack until the stack is empty, and it still is unable to shift the error symbol, then the `%parse_failure` routine is invoked and the parser resets itself to its start state, ready to begin parsing a new file. This is what will happen at the very first syntax error, of course, if there are no instances of the "error" non-terminal in your grammar.
 
+## History of Lemon
+
+Lemon was originally written by Richard Hipp sometime in the late 1980s on a Sun4 Workstation using K&R C. There was a companion LL(1) parser generator program named "Lime", the source code to which as been lost.
+
+The [`lemon.c`][lemon.c] source file was originally many separate files that were compiled together to generate the "lemon" executable. Sometime in the 1990s, the individual source code files were combined together into the current single large "`lemon.c`" source file. You can still see traces of original filenames in the code.
+
+Since 2001, Lemon has been part of the [SQLite project] and the source code to Lemon has been managed as a part of the [SQLite source tree] in the following files:
+
+- [`tool/lemon.c`][upstream lemon.c]
+- [`tool/lempar.c`][upstream lempar.c]
+- [`doc/lemon.html`][upstream lemon.html]
+
+<span id="copyright"></span>
+
+## Copyright
+
+All of the source code to Lemon, including the template parser file "[`lempar.c`][lempar.c]" and this documentation file ("[`lemon.md`][lemon.md]") are in the public domain. You can use the code for any purpose and without attribution.
+
+The code comes with no warranty. If it breaks, you get to keep both pieces.
+
+
 <!-----------------------------------------------------------------------------
                                REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
 [SQLite]: https://www.sqlite.org/ "Visit SQLite website"
+[SQLite project]: https://www.sqlite.org/ "Visit SQLite website"
+[SQLite source tree]: https://sqlite.org/src/ "Visit the SQLite Source Repository"
 
 [context free grammar]: https://en.wikipedia.org/wiki/Context-free_grammar "See Wikipedia page on 'context-free grammar' (CFG)"
 
@@ -717,5 +806,18 @@ If the parser pops its stack until the stack is empty, and it still is unable to
 [Error Processing]: #error-processing "Jump to section"
 [left]: #the-left-directive "Jump to section"
 [precedence rules]: #precedence-rules "Jump to section"
+
+<!-- project files -->
+
+[lemon.c]: ./lemon.c "View sourc file"
+[lempar.c]: ./lempar.c "View source file"
+[lemon.md]: ./lemon.md "View sourc file"
+
+<!-- upstream files -->
+
+[upstream lemon.c]: https://sqlite.org/src/file/tool/lemon.c "View upstream source at SQLite Source Repository"
+[upstream lempar.c]: https://sqlite.org/src/file/tool/lempar.c "View upstream source at SQLite Source Repository"
+[upstream lemon.html]: https://sqlite.org/src/file/doc/lemon.html "View upstream source at SQLite Source Repository"
+
 
 <!-- EOF -->
