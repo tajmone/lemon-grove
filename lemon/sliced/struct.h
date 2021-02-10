@@ -167,7 +167,7 @@ struct lemon {
   struct symbol *errsym;   /* The error symbol */
   struct symbol *wildcard; /* Token that matches anything */
   char *name;              /* Name of the generated parser */
-  char *arg;               /* Declaration of the 3th argument to parser */
+  char *arg;               /* Declaration of the 3rd argument to parser */
   char *ctx;               /* Declaration of 2nd argument to constructor */
   char *tokentype;         /* Type of terminal symbols in the parser stack */
   char *vartype;           /* The default type of non-terminal symbols */

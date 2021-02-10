@@ -347,12 +347,12 @@ void ReportOutput(struct lemon *lemp)
 }
 
 /* Search for the file "name" which is in the same directory as
-** the exacutable */
+** the executable */
 PRIVATE char *pathsearch(char *argv0, char *name, int modemask)
 {
   const char *pathlist;
-  char *pathbufptr;
-  char *pathbuf;
+  char *pathbufptr = 0;
+  char *pathbuf = 0;
   char *path,*cp;
   char c;
 
@@ -386,8 +386,8 @@ PRIVATE char *pathsearch(char *argv0, char *name, int modemask)
         else pathbuf = &cp[1];
         if( access(path,modemask)==0 ) break;
       }
-      free(pathbufptr);
     }
+    free(pathbufptr);
   }
   return path;
 }
@@ -471,6 +471,7 @@ PRIVATE FILE *tplt_open(struct lemon *lemp)
   char buf[1000];
   FILE *in;
   char *tpltname;
+  char *toFree = 0;
   char *cp;
 
   /* first, see if user specified a template filename on the command line. */
@@ -502,7 +503,7 @@ PRIVATE FILE *tplt_open(struct lemon *lemp)
   }else if( access(templatename,004)==0 ){
     tpltname = templatename;
   }else{
-    tpltname = pathsearch(lemp->argv0,templatename,0);
+    toFree = tpltname = pathsearch(lemp->argv0,templatename,0);
   }
   if( tpltname==0 ){
     fprintf(stderr,"Can't find the parser driver template file \"%s\".\n",
@@ -512,10 +513,10 @@ PRIVATE FILE *tplt_open(struct lemon *lemp)
   }
   in = fopen(tpltname,"rb");
   if( in==0 ){
-    fprintf(stderr,"Can't open the template file \"%s\".\n",templatename);
+    fprintf(stderr,"Can't open the template file \"%s\".\n",tpltname);
     lemp->errorcnt++;
-    return 0;
   }
+  free(toFree);
   return in;
 }
 
@@ -701,7 +702,7 @@ PRIVATE int translate_code(struct lemon *lemp, struct rule *rp){
     lhsdirect = 1;
   }else if( rp->rhsalias[0]==0 ){
     /* The left-most RHS symbol has no value.  LHS direct is ok.  But
-    ** we have to call the distructor on the RHS symbol first. */
+    ** we have to call the destructor on the RHS symbol first. */
     lhsdirect = 1;
     if( has_destructor(rp->rhs[0],lemp) ){
       append_str(0,0,0,0);
@@ -1682,7 +1683,7 @@ void ReportTable(
   ** yyRuleInfoNRhs[].
   **
   ** Note: This code depends on the fact that rules are number
-  ** sequentually beginning with 0.
+  ** sequentially beginning with 0.
   */
   for(i=0, rp=lemp->rule; rp; rp=rp->next, i++){
     fprintf(out,"  %4d,  /* (%d) ", rp->lhs->index, i);

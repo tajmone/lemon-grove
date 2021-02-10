@@ -401,7 +401,7 @@ struct lemon {
   struct symbol *errsym;   /* The error symbol */
   struct symbol *wildcard; /* Token that matches anything */
   char *name;              /* Name of the generated parser */
-  char *arg;               /* Declaration of the 3th argument to parser */
+  char *arg;               /* Declaration of the 3rd argument to parser */
   char *ctx;               /* Declaration of 2nd argument to constructor */
   char *tokentype;         /* Type of terminal symbols in the parser stack */
   char *vartype;           /* The default type of non-terminal symbols */
@@ -1027,7 +1027,7 @@ PRIVATE void buildshifts(struct lemon *lemp, struct state *stp)
   struct symbol *bsp;  /* Symbol following the dot in configuration "bcfp" */
   struct state *newstp; /* A pointer to a successor state */
 
-  /* Each configuration becomes complete after it contibutes to a successor
+  /* Each configuration becomes complete after it contributes to a successor
   ** state.  Initially, all configurations are incomplete */
   for(cfp=stp->cfp; cfp; cfp=cfp->next) cfp->status = INCOMPLETE;
 
@@ -1591,14 +1591,14 @@ static struct rule *Rule_merge(struct rule *pA, struct rule *pB){
 ** Sort a list of rules in order of increasing iRule value
 */
 static struct rule *Rule_sort(struct rule *rp){
-  int i;
+  unsigned int i;
   struct rule *pNext;
   struct rule *x[32];
   memset(x, 0, sizeof(x));
   while( rp ){
     pNext = rp->next;
     rp->next = 0;
-    for(i=0; i<sizeof(x)/sizeof(x[0]) && x[i]; i++){
+    for(i=0; i<sizeof(x)/sizeof(x[0])-1 && x[i]; i++){
       rp = Rule_merge(x[i], rp);
       x[i] = 0;
     }
@@ -1625,8 +1625,7 @@ static void stats_line(const char *zLabel, int iValue){
 }
 
 /* The main program.  Parse the command line and do it... */
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv){
   static int version = 0;
   static int rpflag = 0;
   static int basisflag = 0;
@@ -1669,6 +1668,7 @@ int main(int argc, char **argv)
   struct lemon lem;
   struct rule *rp;
 
+  (void)argc;
   OptInit(argv,options,stderr);
   if( version ){
      printf("Lemon version 1.0\n");
@@ -1887,7 +1887,7 @@ static char *merge(
 **
 ** Return Value:
 **   A pointer to the head of a sorted list containing the elements
-**   orginally in list.
+**   originally in list.
 **
 ** Side effects:
 **   The "next" pointers for elements in list are changed.
@@ -2266,7 +2266,7 @@ static void parseonetoken(struct pstate *psp)
       psp->preccounter = 0;
       psp->firstrule = psp->lastrule = 0;
       psp->gp->nrule = 0;
-      /* Fall thru to next case */
+      /* fall through */
     case WAITING_FOR_DECL_OR_RULE:
       if( x[0]=='%' ){
         psp->state = WAITING_FOR_DECL_KEYWORD;
@@ -3513,12 +3513,12 @@ void ReportOutput(struct lemon *lemp)
 }
 
 /* Search for the file "name" which is in the same directory as
-** the exacutable */
+** the executable */
 PRIVATE char *pathsearch(char *argv0, char *name, int modemask)
 {
   const char *pathlist;
-  char *pathbufptr;
-  char *pathbuf;
+  char *pathbufptr = 0;
+  char *pathbuf = 0;
   char *path,*cp;
   char c;
 
@@ -3552,8 +3552,8 @@ PRIVATE char *pathsearch(char *argv0, char *name, int modemask)
         else pathbuf = &cp[1];
         if( access(path,modemask)==0 ) break;
       }
-      free(pathbufptr);
     }
+    free(pathbufptr);
   }
   return path;
 }
@@ -3637,6 +3637,7 @@ PRIVATE FILE *tplt_open(struct lemon *lemp)
   char buf[1000];
   FILE *in;
   char *tpltname;
+  char *toFree = 0;
   char *cp;
 
   /* first, see if user specified a template filename on the command line. */
@@ -3668,7 +3669,7 @@ PRIVATE FILE *tplt_open(struct lemon *lemp)
   }else if( access(templatename,004)==0 ){
     tpltname = templatename;
   }else{
-    tpltname = pathsearch(lemp->argv0,templatename,0);
+    toFree = tpltname = pathsearch(lemp->argv0,templatename,0);
   }
   if( tpltname==0 ){
     fprintf(stderr,"Can't find the parser driver template file \"%s\".\n",
@@ -3678,10 +3679,10 @@ PRIVATE FILE *tplt_open(struct lemon *lemp)
   }
   in = fopen(tpltname,"rb");
   if( in==0 ){
-    fprintf(stderr,"Can't open the template file \"%s\".\n",templatename);
+    fprintf(stderr,"Can't open the template file \"%s\".\n",tpltname);
     lemp->errorcnt++;
-    return 0;
   }
+  free(toFree);
   return in;
 }
 
@@ -3867,7 +3868,7 @@ PRIVATE int translate_code(struct lemon *lemp, struct rule *rp){
     lhsdirect = 1;
   }else if( rp->rhsalias[0]==0 ){
     /* The left-most RHS symbol has no value.  LHS direct is ok.  But
-    ** we have to call the distructor on the RHS symbol first. */
+    ** we have to call the destructor on the RHS symbol first. */
     lhsdirect = 1;
     if( has_destructor(rp->rhs[0],lemp) ){
       append_str(0,0,0,0);
@@ -4848,7 +4849,7 @@ void ReportTable(
   ** yyRuleInfoNRhs[].
   **
   ** Note: This code depends on the fact that rules are number
-  ** sequentually beginning with 0.
+  ** sequentially beginning with 0.
   */
   for(i=0, rp=lemp->rule; rp; rp=rp->next, i++){
     fprintf(out,"  %4d,  /* (%d) ", rp->lhs->index, i);

@@ -83,14 +83,14 @@ static struct rule *Rule_merge(struct rule *pA, struct rule *pB){
 ** Sort a list of rules in order of increasing iRule value
 */
 static struct rule *Rule_sort(struct rule *rp){
-  int i;
+  unsigned int i;
   struct rule *pNext;
   struct rule *x[32];
   memset(x, 0, sizeof(x));
   while( rp ){
     pNext = rp->next;
     rp->next = 0;
-    for(i=0; i<sizeof(x)/sizeof(x[0]) && x[i]; i++){
+    for(i=0; i<sizeof(x)/sizeof(x[0])-1 && x[i]; i++){
       rp = Rule_merge(x[i], rp);
       x[i] = 0;
     }
@@ -117,8 +117,7 @@ static void stats_line(const char *zLabel, int iValue){
 }
 
 /* The main program.  Parse the command line and do it... */
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv){
   static int version = 0;
   static int rpflag = 0;
   static int basisflag = 0;
@@ -161,6 +160,7 @@ int main(int argc, char **argv)
   struct lemon lem;
   struct rule *rp;
 
+  (void)argc;
   OptInit(argv,options,stderr);
   if( version ){
      printf("Lemon version 1.0\n");
