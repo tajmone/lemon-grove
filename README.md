@@ -207,7 +207,7 @@ Lemon has played an influential role in the development of parser generators, se
 
 By [Martin Vejnár], Boost Software License 1.0.
 
-limecc is a lexer and parser generator similar to other tools like Yacc, Bison and especially Lemon from which limecc sources inspiration. Grammars are written in a language called Lime, which describes lexical tokens, grammar productions, and sematic actions. The generator produces C++ code for the corresponding lexer and parser.
+limecc is a lexer and parser generator similar to other tools like Yacc, Bison and especially Lemon from which limecc sources inspiration. Grammars are written in a language called Lime, which describes lexical tokens, grammar productions, and semantic actions. The generator produces C++ code for the corresponding lexer and parser.
 
 ## Editors Support for Lemon
 
