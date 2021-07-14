@@ -536,6 +536,7 @@ Lemon supports the following special directives:
 - [`%stack_size`][%stack_size]
 - [`%start_symbol`][%start_symbol]
 - [`%syntax_error`][%syntax_error]
+- [`%token`][%token]
 - [`%token_class`][%token_class]
 - [`%token_destructor`][%token_destructor]
 - [`%token_prefix`][%token_prefix]
@@ -846,6 +847,27 @@ See [Error Processing].
 
 
 <!-- MarkdownTOC:excluded -->
+#### The `%token` directive
+
+Tokens are normally created automatically, the first time they are used.
+Any identifier that begins with an upper-case letter is a token.
+
+Sometimes it is useful to declare tokens in advance, however.
+The integer values assigned to each token determined by the order in which the tokens are seen.
+So by declaring tokens in advance, it is possible to cause some tokens to have low-numbered values, which might be desirable in some grammars, or to have sequential values assigned to a sequence of related tokens.
+For this reason, the `%token` directive is provided to declare tokens in advance.
+The syntax is as follows:
+
+``` lemon-grammar
+%token TOKEN TOKEN... .
+```
+
+The `%token` directive is followed by zero or more token symbols and terminated by a single "`.`".
+Each token named is created if it does not already exist.
+Tokens are created in order.
+
+
+<!-- MarkdownTOC:excluded -->
 #### The `%token_class` directive
 
 Undocumented.
@@ -1012,6 +1034,7 @@ If it breaks, you get to keep both pieces.
 [%stack_size]: #the-stack_size-directive "Jump to section"
 [%start_symbol]: #the-start_symbol-directive "Jump to section"
 [%syntax_error]: #the-syntax_error-directive "Jump to section"
+[%token]: #the-token-directive "Jump to section"
 [%token_class]: #the-token_class-directive "Jump to section"
 [%token_destructor]: #the-token_destructor-directive "Jump to section"
 [%token_prefix]: #the-token_prefix-directive "Jump to section"

@@ -88,7 +88,7 @@ This folder contains the original Lemon source files taken from the [SQLite] pro
 
 And the [official Lemon documentation], ported to markdown by Tristano Ajmone:
 
-- [`lemon.md`][lemon.md] — Ported from SQLite [`doc/lemon.html`][us lemon.html], updated to check-in [`2ffb2ffa`][2ffb2ffa]  (2021-01-16)
+- [`lemon.md`][lemon.md] — Ported from SQLite [`doc/lemon.html`][us lemon.html], updated to check-in [`36624d37`][36624d37]  (2021-03-28)
 
 > **NOTE** — The C sources are unaltered, except for minor whitespace modifications to pass our [EditorConfig] code-styles validation on Travis CI — i.e., stripping trailing whitespace, and other minor aesthetic tweaks that don't involve actual changes to the code.
 
@@ -96,6 +96,10 @@ And the [official Lemon documentation], ported to markdown by Tristano Ajmone:
 
 In the following changelog, "upstream" refers to the [SQLite] project hosting the original Lemon sources.
 
+- **2021-07-14**
+    + `lemon.md` updated to upstream check-in [`36624d37`][36624d37]  (2021-03-28) — documents the `%token` directive.
+    + `lemon.c` compared to upstream check-in [`36624d37`][36624d37]  (2021-03-28) — only whitespace noise changes.
+    + `lempar.c` unchanged.
 - **2021-02-10**
     + `lemon.c` updated to upstream check-in [`d1e22e2f`][d1e22e2f]  (2021-01-07) — fix compiler warnings and typos.
     + `lempar.c` updated to upstream check-in [`203c049c`][203c049c]  (2021-01-02) — improved.
@@ -156,6 +160,7 @@ In the following changelog, "upstream" refers to the [SQLite] project hosting th
 
 
 [us lemon.html]: https://www.sqlite.org/src/file/doc/lemon.html "View latest upstream source file version"
+[36624d37]: https://www.sqlite.org/src/info/36624d3740a8d095 "View latest upstream source file version"
 [2ffb2ffa]: https://www.sqlite.org/src/info/2ffb2ffa0ea147ed "View latest upstream source file version"
 [9c9c46dc]: https://www.sqlite.org/src/info/9c9c46dcbe92aeab "View upstream check-in"
 
