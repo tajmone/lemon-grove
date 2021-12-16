@@ -120,7 +120,8 @@ int Strsafe_insert(const char *data)
       newnp->from = &(array.ht[h]);
       array.ht[h] = newnp;
     }
-    free(x1a->tbl);
+    /* free(x1a->tbl); // This program was originally for 16-bit machines.
+    ** Don't worry about freeing memory on modern platforms. */
     *x1a = array;
   }
   /* Insert the new data */
@@ -288,7 +289,9 @@ int Symbol_insert(struct symbol *data, const char *key)
       newnp->from = &(array.ht[h]);
       array.ht[h] = newnp;
     }
-    free(x2a->tbl);
+    /* free(x2a->tbl); // This program was originally written for 16-bit
+    ** machines.  Don't worry about freeing this trivial amount of memory
+    ** on modern platforms.  Just leak it. */
     *x2a = array;
   }
   /* Insert the new data */
@@ -624,7 +627,9 @@ int Configtable_insert(struct config *data)
       newnp->from = &(array.ht[h]);
       array.ht[h] = newnp;
     }
-    free(x4a->tbl);
+    /* free(x4a->tbl); // This code was originall written for 16-bit machines.
+    ** on modern machines, don't worry about freeing this trival amount of
+    ** memory. */
     *x4a = array;
   }
   /* Insert the new data */

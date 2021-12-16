@@ -81,10 +81,10 @@ There is a clear difference in the coding styles of these two products, with SQL
 
 # Files History and Sources
 
-This folder contains the original Lemon source files taken from the [SQLite] project on February 10, 2021:
+This folder contains the original Lemon source files taken from the [SQLite] project:
 
-- [`lemon.c`][lemon.c] — Taken from SQLite [`tool/lemon.c`][us lemon.c], check-in [`d1e22e2f`][d1e22e2f]  (2021-01-07)
-- [`lempar.c`][lempar.c] — Taken from SQLite [`tool/lempar.c`][us lempar.c], check-in [`203c049c`][203c049c]  (2021-01-02)
+- [`lemon.c`][lemon.c] — Taken from SQLite [`tool/lemon.c`][us lemon.c], check-in [`f2f279b2`][f2f279b2]  (2021-10-04)
+- [`lempar.c`][lempar.c] — Taken from SQLite [`tool/lempar.c`][us lempar.c], check-in [`ba4fb518`][ba4fb518]  (2021-11-09)
 
 And the [official Lemon documentation], ported to markdown by Tristano Ajmone:
 
@@ -96,10 +96,13 @@ And the [official Lemon documentation], ported to markdown by Tristano Ajmone:
 
 In the following changelog, "upstream" refers to the [SQLite] project hosting the original Lemon sources.
 
+- **2021-12-16**
+    + `lemon.c` updated to upstream check-in [`f2f279b2`][f2f279b2]  (2021-10-04) — fix harmless static analyzer warnings.
+    + `lempar.c` updated to upstream check-in [`ba4fb518`][ba4fb518]  (2021-11-09) — fix so that Lemon can compile with `NDEBUG`.
 - **2021-07-14**
-    + `lemon.md` updated to upstream check-in [`36624d37`][36624d37]  (2021-03-28) — documents the `%token` directive.
     + `lemon.c` compared to upstream check-in [`36624d37`][36624d37]  (2021-03-28) — only whitespace noise changes.
     + `lempar.c` unchanged.
+    + `lemon.md` updated to upstream check-in [`36624d37`][36624d37]  (2021-03-28) — documents the `%token` directive.
 - **2021-02-10**
     + `lemon.c` updated to upstream check-in [`d1e22e2f`][d1e22e2f]  (2021-01-07) — fix compiler warnings and typos.
     + `lempar.c` updated to upstream check-in [`203c049c`][203c049c]  (2021-01-02) — improved.
@@ -140,31 +143,32 @@ In the following changelog, "upstream" refers to the [SQLite] project hosting th
 [examples]: ./examples/ "Navigate folder"
 [sliced]: ./sliced/ "Navigate folder"
 
-<!-- upstream sources & check-ins (newest on top) -->
+<!-- upstream sources -->
 
 [us lemon.c]: https://www.sqlite.org/src/file/tool/lemon.c "View latest upstream source file version"
-[d1e22e2f]: https://www.sqlite.org/src/info/d1e22e2f76cce7eb "View upstream check-in"
-[430c5d1d]: https://www.sqlite.org/src/info/430c5d1da57af452 "View upstream check-in"
-[fccfb8a9]: https://www.sqlite.org/src/info/fccfb8a9ed3c1df9 "View upstream check-in"
-[2da0eea0]: https://www.sqlite.org/src/info/2da0eea02d128c37 "View upstream check-in"
-[ca068d82]: https://www.sqlite.org/src/info/ca068d82387fc3cd "View upstream check-in"
-[1caff0fb]: https://www.sqlite.org/src/info/1caff0fb0b2051e2 "View upstream check-in"
-
-
 [us lempar.c]: https://www.sqlite.org/src/file/tool/lempar.c "View latest upstream source file version"
-[203c049c]: https://www.sqlite.org/src/info/203c049c66238041 "View upstream check-in"
-[84d54eb3]: https://www.sqlite.org/src/info/84d54eb357161741 "View upstream check-in"
-[4d6d2fc0]: https://www.sqlite.org/src/info/4d6d2fc046d586a1 "View upstream check-in"
-[9e664585]: https://www.sqlite.org/src/info/9e66458592d40fbd "View upstream check-in"
-[70fe8ec2]: https://www.sqlite.org/src/info/70fe8ec2ae3099b8 "View upstream check-in"
-
-
 [us lemon.html]: https://www.sqlite.org/src/file/doc/lemon.html "View latest upstream source file version"
-[36624d37]: https://www.sqlite.org/src/info/36624d3740a8d095 "View latest upstream source file version"
-[2ffb2ffa]: https://www.sqlite.org/src/info/2ffb2ffa0ea147ed "View latest upstream source file version"
-[9c9c46dc]: https://www.sqlite.org/src/info/9c9c46dcbe92aeab "View upstream check-in"
-
 [official Lemon documentation]: https://sqlite.org/src/doc/trunk/doc/lemon.html "View original HTML documentation"
+
+<!-- upstream check-ins (asciibetically sorted) -->
+
+[1caff0fb]: https://www.sqlite.org/src/info/1caff0fb0b2051e2 "View upstream check-in 1caff0fb (2019-01-15)"
+[203c049c]: https://www.sqlite.org/src/info/203c049c66238041 "View upstream check-in 203c049c (2021-01-02)"
+[2da0eea0]: https://www.sqlite.org/src/info/2da0eea02d128c37 "View upstream check-in 2da0eea0 (2019-06-03)"
+[2ffb2ffa]: https://www.sqlite.org/src/info/2ffb2ffa0ea147ed "View upstream check-in 2ffb2ffa (2021-01-16)"
+[36624d37]: https://www.sqlite.org/src/info/36624d3740a8d095 "View upstream check-in 36624d37 (2021-03-28)"
+[430c5d1d]: https://www.sqlite.org/src/info/430c5d1da57af452 "View upstream check-in 430c5d1d (2020-09-05)"
+[4d6d2fc0]: https://www.sqlite.org/src/info/4d6d2fc046d586a1 "View upstream check-in 4d6d2fc0 (2019-12-11)"
+[70fe8ec2]: https://www.sqlite.org/src/info/70fe8ec2ae3099b8 "View upstream check-in 70fe8ec2 (2018-12-03)"
+[84d54eb3]: https://www.sqlite.org/src/info/84d54eb357161741 "View upstream check-in 84d54eb3 (2020-09-01)"
+[9c9c46dc]: https://www.sqlite.org/src/info/9c9c46dcbe92aeab "View upstream check-in 9c9c46dc (2018-11-27)"
+[9e664585]: https://www.sqlite.org/src/info/9e66458592d40fbd "View upstream check-in 9e664585 (2019-07-16)"
+[ba4fb518]: https://www.sqlite.org/src/info/ba4fb51853fbcb8c "View upstream check-in ba4fb518 (2021-11-09)"
+[ca068d82]: https://www.sqlite.org/src/info/ca068d82387fc3cd "View upstream check-in ca068d82 (2019-05-10)"
+[d1e22e2f]: https://www.sqlite.org/src/info/d1e22e2f76cce7eb "View upstream check-in d1e22e2f (2021-01-07)"
+[f2f279b2]: https://www.sqlite.org/src/info/f2f279b2cc1c8b3b "View upstream check-in f2f279b2 (2021-10-04)"
+[fccfb8a9]: https://www.sqlite.org/src/info/fccfb8a9ed3c1df9 "View upstream check-in fccfb8a9 (2019-12-19)"
+
 
 <!-- 3rd party tools -->
 

@@ -11,8 +11,12 @@ static FILE *errstream;
 static void errline(int n, int k, FILE *err)
 {
   int spcnt, i;
-  if( g_argv[0] ) fprintf(err,"%s",g_argv[0]);
-  spcnt = lemonStrlen(g_argv[0]) + 1;
+  if( g_argv[0] ){
+    fprintf(err,"%s",g_argv[0]);
+    spcnt = lemonStrlen(g_argv[0]) + 1;
+  }else{
+    spcnt = 0;
+  }
   for(i=1; i<n && g_argv[i]; i++){
     fprintf(err," %s",g_argv[i]);
     spcnt += lemonStrlen(g_argv[i])+1;
